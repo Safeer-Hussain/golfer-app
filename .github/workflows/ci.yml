@@ -1,0 +1,29 @@
+name: Golfer CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: false
+
+      - name: Install Package Dependencies
+        run: flutter pub get
+
+      - name: Verify Code Formatting & Static Analysis
+        run: flutter analyze
+
+      - name: Execute Automated Test Suite with Coverage
+        run: flutter test --coverage
