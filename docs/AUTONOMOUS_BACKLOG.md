@@ -2,7 +2,7 @@
 
 This backlog defines 25 granular daily engineering sprints for autonomous progression. Each sprint specifies end-to-end user-facing capability, domain logic, and automated test requirements.
 
-- [ ] **Sprint 1: Nassau Press Side-Bet Calculator**
+- [x] **Sprint 1: Nassau Press Side-Bet Calculator**
   - Interactive Front 9, Back 9, and 18-hole Nassau match tracker with automatic 2-down press detection and ledger balancing across 4 players.
   - Tests: `test/unit/nassau_calculator_test.dart`.
 

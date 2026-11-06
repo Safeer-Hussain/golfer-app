@@ -3,6 +3,7 @@ import '../../core/di/service_locator.dart';
 import 'scorecard_controller.dart';
 import 'widgets/hole_stepper_cockpit.dart';
 import 'widgets/leaderboard_drawer.dart';
+import 'widgets/nassau_press_modal.dart';
 import 'widgets/player_hole_row.dart';
 import 'widgets/round_summary_tabs.dart';
 import 'widgets/share_scorecard_sheet.dart';
@@ -31,6 +32,15 @@ class _ScorecardViewState extends State<ScorecardView> {
       isScrollControlled: true,
       backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
       builder: (ctx) => ShareScorecardSheet(controller: controller),
+    );
+  }
+
+  void _openNassauModal(BuildContext context, ScorecardController controller) {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+      builder: (ctx) => NassauPressModal(controller: controller),
     );
   }
 
@@ -185,6 +195,11 @@ class _ScorecardViewState extends State<ScorecardView> {
                       ),
                     Row(
                       children: [
+                        IconButton(
+                          icon: Icon(Icons.handshake_outlined, size: 20, color: colorScheme.secondary),
+                          tooltip: 'Nassau Side-Bets',
+                          onPressed: () => _openNassauModal(context, controller),
+                        ),
                         IconButton(
                           icon: Icon(Icons.share_outlined, size: 20, color: colorScheme.onSurfaceVariant),
                           tooltip: 'Share Scorecard',

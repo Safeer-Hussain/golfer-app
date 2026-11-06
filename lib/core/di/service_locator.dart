@@ -10,6 +10,7 @@ import '../../data/repositories/flight_repository.dart';
 import '../../data/repositories/scorecard_repository.dart';
 import '../../domain/usecases/caddie_strategy_usecase.dart';
 import '../../domain/usecases/calculate_score_usecase.dart';
+import '../../domain/usecases/nassau_calculator_usecase.dart';
 import '../../presentation/ai_caddie/ai_caddie_controller.dart';
 import '../../presentation/clubhouse_analytics/clubhouse_controller.dart';
 import '../../presentation/flight_setup/flight_setup_controller.dart';
@@ -43,6 +44,7 @@ Future<void> setupServiceLocator({SharedPreferences? mockPrefs}) async {
   // Use Cases
   sl.registerSingleton<CalculateScoreUseCase>(CalculateScoreUseCase());
   sl.registerSingleton<CaddieStrategyUseCase>(CaddieStrategyUseCase());
+  sl.registerSingleton<NassauCalculatorUseCase>(NassauCalculatorUseCase());
 
   // Controllers
   sl.registerSingleton<ThemeController>(ThemeController(sl<PreferencesService>()));
