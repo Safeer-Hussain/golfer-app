@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/di/service_locator.dart';
+import '../green_reading/green_reading_view.dart';
 import 'scorecard_controller.dart';
 import 'widgets/hole_stepper_cockpit.dart';
 import 'widgets/leaderboard_drawer.dart';
@@ -44,6 +45,14 @@ class _ScorecardViewState extends State<ScorecardView> {
     );
   }
 
+  void _openGreenReading(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => const GreenReadingView(),
+      ),
+    );
+  }
+
   Widget _buildCockpitPane(BuildContext context, ScorecardController controller) {
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -68,8 +77,8 @@ class _ScorecardViewState extends State<ScorecardView> {
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: widget.onOpenRangefinder,
-                    icon: const Icon(Icons.my_location_rounded, size: 16),
-                    label: const Text('Target Pin (GPS)', style: TextStyle(fontSize: 11)),
+                    icon: const Icon(Icons.my_location_rounded, size: 15),
+                    label: const Text('Pin (GPS)', style: TextStyle(fontSize: 11)),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: colorScheme.primary,
                       side: BorderSide(color: colorScheme.primary.withValues(alpha: 0.5)),
@@ -77,12 +86,25 @@ class _ScorecardViewState extends State<ScorecardView> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () => _openGreenReading(context),
+                    icon: const Icon(Icons.speed_rounded, size: 15),
+                    label: const Text('Green Reading', style: TextStyle(fontSize: 11)),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: colorScheme.tertiary,
+                      side: BorderSide(color: colorScheme.tertiary.withValues(alpha: 0.5)),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 6),
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: widget.onOpenAiCaddie,
-                    icon: const Icon(Icons.smart_toy_rounded, size: 16),
-                    label: const Text('Hole Strategy', style: TextStyle(fontSize: 11)),
+                    icon: const Icon(Icons.smart_toy_rounded, size: 15),
+                    label: const Text('Strategy', style: TextStyle(fontSize: 11)),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: colorScheme.secondary,
                       side: BorderSide(color: colorScheme.secondary.withValues(alpha: 0.5)),
@@ -195,6 +217,11 @@ class _ScorecardViewState extends State<ScorecardView> {
                       ),
                     Row(
                       children: [
+                        IconButton(
+                          icon: Icon(Icons.speed_rounded, size: 20, color: colorScheme.tertiary),
+                          tooltip: 'Green Reading & Stimpmeter',
+                          onPressed: () => _openGreenReading(context),
+                        ),
                         IconButton(
                           icon: Icon(Icons.handshake_outlined, size: 20, color: colorScheme.secondary),
                           tooltip: 'Nassau Side-Bets',

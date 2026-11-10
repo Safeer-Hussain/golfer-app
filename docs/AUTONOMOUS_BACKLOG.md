@@ -6,9 +6,9 @@ This backlog defines 25 granular daily engineering sprints for autonomous progre
   - Interactive Front 9, Back 9, and 18-hole Nassau match tracker with automatic 2-down press detection and ledger balancing across 4 players.
   - Tests: `test/unit/nassau_calculator_test.dart`.
 
-- [ ] **Sprint 2: Green Reading Slope & Stimpmeter Simulator**
+- [x] **Sprint 2: Green Reading Slope & Stimpmeter Simulator**
   - Gyroscope/accelerometer slope reading tool displaying degrees of break, fall line arrow, and adjusted putting distance for green speeds 8.0 to 13.0 stimp.
-  - Tests: `test/unit/green_reading_test.dart`.
+  - Tests: `test/unit/green_reading_test.dart`, `test/widget/green_reading_view_test.dart`.
 
 - [ ] **Sprint 3: Swing Tempo Metronome Audio/Visual Trainer**
   - 3:1 Tour tempo audio/visual metronome (e.g. 21/7 and 24/8 frames) with vibrating tactile beats and swing rhythm calibrator.

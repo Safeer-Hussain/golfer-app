@@ -10,10 +10,12 @@ import '../../data/repositories/flight_repository.dart';
 import '../../data/repositories/scorecard_repository.dart';
 import '../../domain/usecases/caddie_strategy_usecase.dart';
 import '../../domain/usecases/calculate_score_usecase.dart';
+import '../../domain/usecases/green_reading_usecase.dart';
 import '../../domain/usecases/nassau_calculator_usecase.dart';
 import '../../presentation/ai_caddie/ai_caddie_controller.dart';
 import '../../presentation/clubhouse_analytics/clubhouse_controller.dart';
 import '../../presentation/flight_setup/flight_setup_controller.dart';
+import '../../presentation/green_reading/green_reading_controller.dart';
 import '../../presentation/rangefinder/rangefinder_controller.dart';
 import '../../presentation/scorecard/scorecard_controller.dart';
 import '../../presentation/settings/settings_controller.dart';
@@ -45,6 +47,7 @@ Future<void> setupServiceLocator({SharedPreferences? mockPrefs}) async {
   sl.registerSingleton<CalculateScoreUseCase>(CalculateScoreUseCase());
   sl.registerSingleton<CaddieStrategyUseCase>(CaddieStrategyUseCase());
   sl.registerSingleton<NassauCalculatorUseCase>(NassauCalculatorUseCase());
+  sl.registerSingleton<GreenReadingUseCase>(GreenReadingUseCase());
 
   // Controllers
   sl.registerSingleton<ThemeController>(ThemeController(sl<PreferencesService>()));
@@ -85,6 +88,10 @@ Future<void> setupServiceLocator({SharedPreferences? mockPrefs}) async {
 
   sl.registerSingleton<ClubhouseController>(
     ClubhouseController(sl<ClubhouseRepository>(), sl<ClubBagRepository>()),
+  );
+
+  sl.registerSingleton<GreenReadingController>(
+    GreenReadingController(sl<GreenReadingUseCase>()),
   );
 
   sl.registerSingleton<SettingsController>(
