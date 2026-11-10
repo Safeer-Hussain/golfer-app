@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
+
 import '../../core/constants/golf_courses.dart';
 import '../../core/storage/preferences_service.dart';
 import '../../data/models/club_model.dart';

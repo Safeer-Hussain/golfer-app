@@ -1,4 +1,5 @@
 import 'package:uuid/uuid.dart';
+
 import '../../core/storage/database_helper.dart';
 import '../models/social_post_model.dart';
 
@@ -42,9 +43,15 @@ class ClubhouseRepository {
     await _db.insertSocialPost(post);
   }
 
-  Future<void> togglePostLike(String postId, int currentLikes, bool currentlyLiked) async {
+  Future<void> togglePostLike(
+    String postId,
+    int currentLikes,
+    bool currentlyLiked,
+  ) async {
     final newLiked = !currentlyLiked;
-    final newCount = newLiked ? currentLikes + 1 : (currentLikes > 0 ? currentLikes - 1 : 0);
+    final newCount = newLiked
+        ? currentLikes + 1
+        : (currentLikes > 0 ? currentLikes - 1 : 0);
     await _db.updatePostLikes(postId, newCount, newLiked);
   }
 

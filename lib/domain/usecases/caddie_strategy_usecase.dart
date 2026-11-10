@@ -35,18 +35,24 @@ class CaddieStrategyUseCase {
     // Wind adjustment: 1 mph headwind adds approx 0.9 yard; tailwind subtracts 0.6 yard
     int windAdj = 0;
     String aimLine = 'Aim directly down target flagline.';
-    if (hole.windDirection.contains('N') || hole.windDirection.contains('NE') || hole.windDirection.contains('NW')) {
+    if (hole.windDirection.contains('N') ||
+        hole.windDirection.contains('NE') ||
+        hole.windDirection.contains('NW')) {
       windAdj = (hole.windSpeedMph * 0.85).round();
       aimLine = 'Prevailing headwind. Keep trajectory low with smooth tempo.';
-    } else if (hole.windDirection.contains('S') || hole.windDirection.contains('SE') || hole.windDirection.contains('SW')) {
+    } else if (hole.windDirection.contains('S') ||
+        hole.windDirection.contains('SE') ||
+        hole.windDirection.contains('SW')) {
       windAdj = -(hole.windSpeedMph * 0.6).round();
       aimLine = 'Downwind assistance. Allow for extra rollout on firm green.';
     }
 
     if (hole.windDirection.contains('E')) {
-      aimLine = 'Crosswind from right to left. Hold target 5 yards right of pin.';
+      aimLine =
+          'Crosswind from right to left. Hold target 5 yards right of pin.';
     } else if (hole.windDirection.contains('W')) {
-      aimLine = 'Crosswind from left to right. Start ball 6 yards left of center.';
+      aimLine =
+          'Crosswind from left to right. Start ball 6 yards left of center.';
     }
 
     // Elevation adjustment: 3 feet = approx 1 yard

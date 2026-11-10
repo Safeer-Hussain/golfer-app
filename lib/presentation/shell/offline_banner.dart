@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../core/di/service_locator.dart';
 import '../settings/settings_controller.dart';
 

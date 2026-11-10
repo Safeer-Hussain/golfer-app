@@ -1,16 +1,15 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../../../core/utils/app_feedback.dart';
 import '../scorecard_controller.dart';
 
 class ShareScorecardSheet extends StatefulWidget {
   final ScorecardController controller;
 
-  const ShareScorecardSheet({
-    super.key,
-    required this.controller,
-  });
+  const ShareScorecardSheet({super.key, required this.controller});
 
   @override
   State<ShareScorecardSheet> createState() => _ShareScorecardSheetState();
@@ -29,10 +28,15 @@ class _ShareScorecardSheetState extends State<ShareScorecardSheet> {
   Future<void> _handlePostToClubhouse() async {
     setState(() => _isPosting = true);
     try {
-      await widget.controller.postRoundToClubhouse(commentary: _commentController.text.trim());
+      await widget.controller.postRoundToClubhouse(
+        commentary: _commentController.text.trim(),
+      );
       if (!mounted) return;
       Navigator.of(context).pop();
-      AppFeedback.showSuccess(context, 'Round posted to Clubhouse Social Feed.');
+      AppFeedback.showSuccess(
+        context,
+        'Round posted to Clubhouse Social Feed.',
+      );
     } finally {
       if (mounted) {
         setState(() => _isPosting = false);
@@ -48,13 +52,15 @@ class _ShareScorecardSheetState extends State<ShareScorecardSheet> {
   }
 
   Future<void> _handleExportTelemetry() async {
-    final jsonStr = const JsonEncoder.withIndent('  ').convert(
-      widget.controller.activeScorecard.toJson(),
-    );
+    final jsonStr = const JsonEncoder.withIndent('  ')
+        .convert(widget.controller.activeScorecard.toJson());
     await Clipboard.setData(ClipboardData(text: jsonStr));
     if (!mounted) return;
     Navigator.of(context).pop();
-    AppFeedback.showSuccess(context, 'Round Telemetry JSON copied to clipboard.');
+    AppFeedback.showSuccess(
+      context,
+      'Round Telemetry JSON copied to clipboard.',
+    );
   }
 
   @override
@@ -84,7 +90,10 @@ class _ShareScorecardSheetState extends State<ShareScorecardSheet> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.close_rounded, color: colorScheme.onSurfaceVariant),
+                    icon: Icon(
+                      Icons.close_rounded,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                 ],
@@ -96,7 +105,9 @@ class _ShareScorecardSheetState extends State<ShareScorecardSheet> {
                 decoration: InputDecoration(
                   labelText: 'Round Notes / Highlights',
                   hintText: 'e.g. 4 birdies on back 9, driver carried 280 yds consistently!',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
               const SizedBox(height: 16),
@@ -108,7 +119,9 @@ class _ShareScorecardSheetState extends State<ShareScorecardSheet> {
                   backgroundColor: colorScheme.primary,
                   foregroundColor: colorScheme.onPrimary,
                   padding: const EdgeInsets.symmetric(vertical: 12),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
@@ -120,7 +133,9 @@ class _ShareScorecardSheetState extends State<ShareScorecardSheet> {
                   foregroundColor: colorScheme.onSurface,
                   side: BorderSide(color: colorScheme.outlineVariant),
                   padding: const EdgeInsets.symmetric(vertical: 12),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
@@ -130,9 +145,13 @@ class _ShareScorecardSheetState extends State<ShareScorecardSheet> {
                 label: const Text('Export Round Telemetry (JSON)'),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: colorScheme.secondary,
-                  side: BorderSide(color: colorScheme.secondary.withValues(alpha: 0.5)),
+                  side: BorderSide(
+                    color: colorScheme.secondary.withValues(alpha: 0.5),
+                  ),
                   padding: const EdgeInsets.symmetric(vertical: 12),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
             ],

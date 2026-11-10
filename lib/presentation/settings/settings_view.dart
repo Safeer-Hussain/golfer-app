@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../core/constants/app_constants.dart';
 import '../../core/di/service_locator.dart';
 import '../../core/theme/theme_controller.dart';
@@ -40,24 +41,47 @@ class SettingsView extends StatelessWidget {
                 child: Column(
                   children: [
                     ListTile(
-                      leading: Icon(Icons.straighten_rounded, color: colorScheme.primary),
+                      leading: Icon(
+                        Icons.straighten_rounded,
+                        color: colorScheme.primary,
+                      ),
                       title: Text(
                         'Distance Unit System',
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: colorScheme.onSurface,
+                        ),
                       ),
                       subtitle: Text(
                         settingsController.unitSystem == 'yards'
                             ? 'Yards (Imperial Championship Standard)'
                             : 'Meters (Metric Standard)',
-                        style: TextStyle(fontSize: 11, color: colorScheme.onSurfaceVariant),
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
                       ),
                       trailing: SegmentedButton<String>(
                         segments: const [
-                          ButtonSegment<String>(value: 'yards', label: Text('Yards', style: TextStyle(fontSize: 11))),
-                          ButtonSegment<String>(value: 'meters', label: Text('Meters', style: TextStyle(fontSize: 11))),
+                          ButtonSegment<String>(
+                            value: 'yards',
+                            label: Text(
+                              'Yards',
+                              style: TextStyle(fontSize: 11),
+                            ),
+                          ),
+                          ButtonSegment<String>(
+                            value: 'meters',
+                            label: Text(
+                              'Meters',
+                              style: TextStyle(fontSize: 11),
+                            ),
+                          ),
                         ],
                         selected: {settingsController.unitSystem},
-                        onSelectionChanged: (set) => settingsController.setUnitSystem(set.first),
+                        onSelectionChanged: (set) =>
+                            settingsController.setUnitSystem(set.first),
                         style: ButtonStyle(
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           visualDensity: VisualDensity.compact,
@@ -67,18 +91,27 @@ class SettingsView extends StatelessWidget {
                     const Divider(height: 1),
                     ListTile(
                       leading: Icon(
-                        themeController.isDarkMode ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
+                        themeController.isDarkMode
+                            ? Icons.dark_mode_rounded
+                            : Icons.light_mode_rounded,
                         color: colorScheme.secondary,
                       ),
                       title: Text(
                         'Appearance Palette',
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: colorScheme.onSurface,
+                        ),
                       ),
                       subtitle: Text(
                         themeController.isDarkMode
                             ? 'Augusta Emerald Dark'
                             : 'Crisp Fairway Light',
-                        style: TextStyle(fontSize: 11, color: colorScheme.onSurfaceVariant),
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
                       ),
                       trailing: Switch.adaptive(
                         value: themeController.isDarkMode,
@@ -109,32 +142,56 @@ class SettingsView extends StatelessWidget {
                   children: [
                     ListTile(
                       leading: Icon(
-                        settingsController.isOffline ? Icons.cloud_off_rounded : Icons.cloud_done_rounded,
-                        color: settingsController.isOffline ? colorScheme.secondary : colorScheme.primary,
+                        settingsController.isOffline
+                            ? Icons.cloud_off_rounded
+                            : Icons.cloud_done_rounded,
+                        color: settingsController.isOffline
+                            ? colorScheme.secondary
+                            : colorScheme.primary,
                       ),
                       title: Text(
                         'Course Connection Status',
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: colorScheme.onSurface,
+                        ),
                       ),
                       subtitle: Text(
                         settingsController.isOffline
                             ? 'Offline Course Mode • Local SQLite & SharedPreferences active'
                             : 'Connected • Background telemetry ready',
-                        style: TextStyle(fontSize: 11, color: colorScheme.onSurfaceVariant),
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
                       ),
                     ),
                     const Divider(height: 1),
                     ListTile(
-                      leading: Icon(Icons.bug_report_outlined, color: colorScheme.secondary),
+                      leading: Icon(
+                        Icons.bug_report_outlined,
+                        color: colorScheme.secondary,
+                      ),
                       title: Text(
                         'Recruiter Debug Drawer',
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: colorScheme.onSurface,
+                        ),
                       ),
                       subtitle: Text(
                         'Test simulated latency, HTTP 503 errors, and tournament sync',
-                        style: TextStyle(fontSize: 11, color: colorScheme.onSurfaceVariant),
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
                       ),
-                      trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 14),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 14,
+                      ),
                       onTap: () {
                         showModalBottomSheet<void>(
                           context: context,
@@ -151,7 +208,10 @@ class SettingsView extends StatelessWidget {
               Center(
                 child: GestureDetector(
                   onLongPress: () {
-                    AppFeedback.showSuccess(context, 'Recruiter Debug Drawer unlocked.');
+                    AppFeedback.showSuccess(
+                      context,
+                      'Recruiter Debug Drawer unlocked.',
+                    );
                     showModalBottomSheet<void>(
                       context: context,
                       isScrollControlled: true,
@@ -173,7 +233,9 @@ class SettingsView extends StatelessWidget {
                         'Long press for Recruiter Field Testing Console',
                         style: TextStyle(
                           fontSize: 10,
-                          color: colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
+                          color: colorScheme.onSurfaceVariant.withValues(
+                            alpha: 0.7,
+                          ),
                         ),
                       ),
                     ],

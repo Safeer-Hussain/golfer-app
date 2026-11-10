@@ -67,7 +67,9 @@ class StimpSelector extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: colorScheme.primary.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: colorScheme.primary.withValues(alpha: 0.3)),
+                  border: Border.all(
+                    color: colorScheme.primary.withValues(alpha: 0.3),
+                  ),
                 ),
                 child: Text(
                   '${currentStimp.toStringAsFixed(1)} Stimp',
@@ -116,22 +118,31 @@ class StimpSelector extends StatelessWidget {
                 onTap: () => onStimpChanged(preset),
                 borderRadius: BorderRadius.circular(8),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: isSelected
                         ? colorScheme.primary
                         : colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: isSelected ? colorScheme.primary : colorScheme.outlineVariant,
+                      color: isSelected
+                          ? colorScheme.primary
+                          : colorScheme.outlineVariant,
                     ),
                   ),
                   child: Text(
                     preset.toStringAsFixed(1),
                     style: TextStyle(
                       fontSize: 12,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                      color: isSelected ? colorScheme.onPrimary : colorScheme.onSurface,
+                      fontWeight: isSelected
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                      color: isSelected
+                          ? colorScheme.onPrimary
+                          : colorScheme.onSurface,
                     ),
                   ),
                 ),

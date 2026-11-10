@@ -17,15 +17,16 @@ void main() {
     databaseFactory = databaseFactoryFfi;
 
     // Mock connectivity channel
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
-      const MethodChannel('dev.fluttercommunity.plus/connectivity'),
-      (MethodCall methodCall) async {
-        if (methodCall.method == 'check') {
-          return ['wifi'];
-        }
-        return null;
-      },
-    );
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
+          const MethodChannel('dev.fluttercommunity.plus/connectivity'),
+          (MethodCall methodCall) async {
+            if (methodCall.method == 'check') {
+              return ['wifi'];
+            }
+            return null;
+          },
+        );
   });
 
   setUp(() async {
@@ -34,46 +35,51 @@ void main() {
   });
 
   group('Widget & Viewport Tests', () {
-    testWidgets('AdaptiveScaffold renders directly with zero duplicate hero tag exceptions', (tester) async {
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: AdaptiveScaffold(),
-        ),
-      );
-      await tester.pumpAndSettle();
+    testWidgets(
+      'AdaptiveScaffold renders directly with zero duplicate hero tag exceptions',
+      (tester) async {
+        await tester.pumpWidget(const MaterialApp(home: AdaptiveScaffold()));
+        await tester.pumpAndSettle();
 
-      expect(tester.takeException(), isNull);
-      expect(find.byType(AdaptiveScaffold), findsOneWidget);
-    });
+        expect(tester.takeException(), isNull);
+        expect(find.byType(AdaptiveScaffold), findsOneWidget);
+      },
+    );
 
-    testWidgets('800x360 landscape viewport renders with zero RenderFlex overflows', (tester) async {
-      tester.view.physicalSize = const Size(800, 360);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
+    testWidgets(
+      '800x360 landscape viewport renders with zero RenderFlex overflows',
+      (tester) async {
+        tester.view.physicalSize = const Size(800, 360);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: FlightSetupView(onStartRound: () {}),
-        ),
-      );
-      await tester.pumpAndSettle();
+        await tester.pumpWidget(
+          MaterialApp(home: FlightSetupView(onStartRound: () {})),
+        );
+        await tester.pumpAndSettle();
 
-      expect(tester.takeException(), isNull);
-    });
+        expect(tester.takeException(), isNull);
+      },
+    );
 
-    testWidgets('ThemeController switches between dark and light themes dynamically', (tester) async {
-      final themeController = sl<ThemeController>();
-      expect(themeController.isDarkMode, isTrue);
+    testWidgets(
+      'ThemeController switches between dark and light themes dynamically',
+      (tester) async {
+        final themeController = sl<ThemeController>();
+        expect(themeController.isDarkMode, isTrue);
 
-      await themeController.toggleTheme();
-      expect(themeController.isDarkMode, isFalse);
+        await themeController.toggleTheme();
+        expect(themeController.isDarkMode, isFalse);
 
-      await themeController.toggleTheme();
-      expect(themeController.isDarkMode, isTrue);
-    });
+        await themeController.toggleTheme();
+        expect(themeController.isDarkMode, isTrue);
+      },
+    );
 
-    testWidgets('GolferApp transitions from SplashView to AdaptiveScaffold', (tester) async {
+    testWidgets('GolferApp transitions from SplashView to AdaptiveScaffold', (
+      tester,
+    ) async {
       await tester.pumpWidget(const GolferApp());
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 1700));

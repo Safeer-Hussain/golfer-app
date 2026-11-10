@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+
 import '../../../domain/entities/green_reading_entity.dart';
 
 class PuttTrajectoryCard extends StatelessWidget {
   final PuttCalculationResult result;
 
-  const PuttTrajectoryCard({
-    super.key,
-    required this.result,
-  });
+  const PuttTrajectoryCard({super.key, required this.result});
 
   @override
   Widget build(BuildContext context) {
@@ -152,8 +150,8 @@ class PuttTrajectoryCard extends StatelessWidget {
                           color: result.distanceAdjustmentFeet.abs() < 0.3
                               ? colorScheme.onSurfaceVariant
                               : (result.distanceAdjustmentFeet > 0
-                                  ? colorScheme.error
-                                  : colorScheme.secondary),
+                                    ? colorScheme.error
+                                    : colorScheme.secondary),
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -232,7 +230,9 @@ class PuttTrajectoryCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: colorScheme.surfaceContainerLow,
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: colorScheme.outlineVariant.withValues(alpha: 0.5)),
+              border: Border.all(
+                color: colorScheme.outlineVariant.withValues(alpha: 0.5),
+              ),
             ),
             child: CustomPaint(
               painter: _PuttTrajectoryPainter(
@@ -394,8 +394,16 @@ class _PuttTrajectoryPainter extends CustomPainter {
 
     final path = Path();
     path.moveTo(startPoint.dx, startPoint.dy);
-    final controlPoint = Offset(size.width * 0.5, (size.height * 0.5) + curveOffset);
-    path.quadraticBezierTo(controlPoint.dx, controlPoint.dy, cupPoint.dx, cupPoint.dy);
+    final controlPoint = Offset(
+      size.width * 0.5,
+      (size.height * 0.5) + curveOffset,
+    );
+    path.quadraticBezierTo(
+      controlPoint.dx,
+      controlPoint.dy,
+      cupPoint.dx,
+      cupPoint.dy,
+    );
 
     final trajectoryPaint = Paint()
       ..color = colorScheme.primary

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../core/di/service_locator.dart';
 import '../scorecard/scorecard_controller.dart';
 import 'ai_caddie_controller.dart';
@@ -73,7 +74,9 @@ class _AiGolfCaddieViewState extends State<AiGolfCaddieView> {
                   height: 14,
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      colorScheme.primary,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -106,7 +109,9 @@ class _AiGolfCaddieViewState extends State<AiGolfCaddieView> {
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
               color: colorScheme.surfaceContainer,
-              border: Border(top: BorderSide(color: colorScheme.outlineVariant)),
+              border: Border(
+                top: BorderSide(color: colorScheme.outlineVariant),
+              ),
             ),
             child: Row(
               children: [
@@ -115,21 +120,35 @@ class _AiGolfCaddieViewState extends State<AiGolfCaddieView> {
                     controller: _inputController,
                     textInputAction: TextInputAction.send,
                     onSubmitted: (_) => _sendMessage(controller),
-                    style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: colorScheme.onSurface,
+                    ),
                     decoration: InputDecoration(
-                      hintText: 'Ask Caddie for hole strategy, club, or wind...',
-                      hintStyle: TextStyle(fontSize: 12, color: colorScheme.onSurfaceVariant),
+                      hintText:
+                          'Ask Caddie for hole strategy, club, or wind...',
+                      hintStyle: TextStyle(
+                        fontSize: 12,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(24),
-                        borderSide: BorderSide(color: colorScheme.outlineVariant),
+                        borderSide: BorderSide(
+                          color: colorScheme.outlineVariant,
+                        ),
                       ),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 10,
+                      ),
                     ),
                   ),
                 ),
                 const SizedBox(width: 8),
                 IconButton.filled(
-                  onPressed: controller.isStreaming ? null : () => _sendMessage(controller),
+                  onPressed: controller.isStreaming
+                      ? null
+                      : () => _sendMessage(controller),
                   icon: const Icon(Icons.arrow_upward_rounded, size: 20),
                   style: IconButton.styleFrom(
                     backgroundColor: colorScheme.primary,
@@ -144,7 +163,10 @@ class _AiGolfCaddieViewState extends State<AiGolfCaddieView> {
     );
   }
 
-  Widget _buildLandscapeInfoPane(BuildContext context, AiCaddieController controller) {
+  Widget _buildLandscapeInfoPane(
+    BuildContext context,
+    AiCaddieController controller,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
     final hole = controller.currentHole;
 
@@ -189,7 +211,11 @@ class _AiGolfCaddieViewState extends State<AiGolfCaddieView> {
                 const SizedBox(height: 6),
                 Text(
                   'Wind: ${hole.windDirection}\nElevation: ${hole.elevationChangeFeet >= 0 ? "+${hole.elevationChangeFeet}" : hole.elevationChangeFeet} ft\nHazards: ${hole.hazardsDescription}',
-                  style: TextStyle(fontSize: 11, color: colorScheme.onSurfaceVariant, height: 1.4),
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: colorScheme.onSurfaceVariant,
+                    height: 1.4,
+                  ),
                 ),
               ],
             ),
@@ -198,7 +224,10 @@ class _AiGolfCaddieViewState extends State<AiGolfCaddieView> {
           OutlinedButton.icon(
             onPressed: () => controller.clearConversation(),
             icon: const Icon(Icons.refresh_rounded, size: 16),
-            label: const Text('Reset Caddie Session', style: TextStyle(fontSize: 11)),
+            label: const Text(
+              'Reset Caddie Session',
+              style: TextStyle(fontSize: 11),
+            ),
             style: OutlinedButton.styleFrom(
               foregroundColor: colorScheme.onSurfaceVariant,
               side: BorderSide(color: colorScheme.outlineVariant),
@@ -214,7 +243,8 @@ class _AiGolfCaddieViewState extends State<AiGolfCaddieView> {
   Widget build(BuildContext context) {
     final controller = sl<AiCaddieController>();
     final scorecardController = sl<ScorecardController>();
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     controller.syncHoleContext(
       scorecardController.course,
@@ -230,9 +260,18 @@ class _AiGolfCaddieViewState extends State<AiGolfCaddieView> {
           body: isLandscape
               ? Row(
                   children: [
-                    Expanded(flex: 2, child: _buildLandscapeInfoPane(context, controller)),
-                    VerticalDivider(width: 1, color: Theme.of(context).colorScheme.outlineVariant),
-                    Expanded(flex: 3, child: _buildChatPane(context, controller)),
+                    Expanded(
+                      flex: 2,
+                      child: _buildLandscapeInfoPane(context, controller),
+                    ),
+                    VerticalDivider(
+                      width: 1,
+                      color: Theme.of(context).colorScheme.outlineVariant,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: _buildChatPane(context, controller),
+                    ),
                   ],
                 )
               : _buildChatPane(context, controller),

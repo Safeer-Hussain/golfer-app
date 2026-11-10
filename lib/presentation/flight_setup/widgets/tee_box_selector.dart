@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/constants/app_constants.dart';
 import '../../../domain/entities/course_entity.dart';
 
@@ -19,10 +20,30 @@ class TeeBoxSelector extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     final tees = [
-      {'name': AppConstants.teeBlack, 'yards': 7120, 'slope': course.slope, 'rating': course.rating},
-      {'name': AppConstants.teeBlue, 'yards': 6680, 'slope': 132, 'rating': 72.0},
-      {'name': AppConstants.teeWhite, 'yards': 6240, 'slope': 125, 'rating': 70.1},
-      {'name': AppConstants.teeRed, 'yards': 5510, 'slope': 118, 'rating': 67.5},
+      {
+        'name': AppConstants.teeBlack,
+        'yards': 7120,
+        'slope': course.slope,
+        'rating': course.rating,
+      },
+      {
+        'name': AppConstants.teeBlue,
+        'yards': 6680,
+        'slope': 132,
+        'rating': 72.0,
+      },
+      {
+        'name': AppConstants.teeWhite,
+        'yards': 6240,
+        'slope': 125,
+        'rating': 70.1,
+      },
+      {
+        'name': AppConstants.teeRed,
+        'yards': 5510,
+        'slope': 118,
+        'rating': 67.5,
+      },
     ];
 
     return Column(
@@ -48,14 +69,19 @@ class TeeBoxSelector extends StatelessWidget {
                 onTap: () => onTeeSelected(name),
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 3),
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: isSelected
                         ? colorScheme.primary.withValues(alpha: 0.15)
                         : colorScheme.surfaceContainer,
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
-                      color: isSelected ? colorScheme.primary : colorScheme.outlineVariant,
+                      color: isSelected
+                          ? colorScheme.primary
+                          : colorScheme.outlineVariant,
                       width: isSelected ? 1.8 : 1.0,
                     ),
                   ),
@@ -66,7 +92,9 @@ class TeeBoxSelector extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: isSelected ? colorScheme.primary : colorScheme.onSurface,
+                          color: isSelected
+                              ? colorScheme.primary
+                              : colorScheme.onSurface,
                         ),
                       ),
                       const SizedBox(height: 2),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../data/models/player_model.dart';
 
 class PlayerCard extends StatelessWidget {
@@ -59,7 +60,10 @@ class PlayerCard extends StatelessWidget {
                     if (player.isCurrentDeviceUser) ...[
                       const SizedBox(width: 6),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: colorScheme.primary.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(4),
@@ -105,7 +109,11 @@ class PlayerCard extends StatelessWidget {
           if (canRemove && !player.isCurrentDeviceUser) ...[
             const SizedBox(width: 4),
             IconButton(
-              icon: Icon(Icons.close_rounded, size: 18, color: colorScheme.error),
+              icon: Icon(
+                Icons.close_rounded,
+                size: 18,
+                color: colorScheme.error,
+              ),
               tooltip: 'Remove player',
               onPressed: onRemove,
             ),

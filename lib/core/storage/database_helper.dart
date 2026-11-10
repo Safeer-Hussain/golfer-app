@@ -1,6 +1,8 @@
 import 'dart:convert';
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+
 import '../constants/app_constants.dart';
 import '../../data/models/club_model.dart';
 import '../../data/models/round_scorecard_model.dart';
@@ -174,24 +176,24 @@ class DatabaseHelper {
   }
 
   // Completed Rounds
-  Future<int> insertRound(RoundScorecardModel round, {int gross = 0, int net = 0}) async {
+  Future<int> insertRound(
+    RoundScorecardModel round, {
+    int gross = 0,
+    int net = 0,
+  }) async {
     final db = await database;
-    return await db.insert(
-      'completed_rounds',
-      {
-        'id': round.id,
-        'course_id': round.courseId,
-        'course_name': round.courseName,
-        'tee_box': round.teeBox,
-        'game_format': round.gameFormat,
-        'played_at': round.playedAt.toIso8601String(),
-        'player_scores_json': jsonEncode(round.toJson()['playerScores']),
-        'gross_score': gross,
-        'net_score': net,
-        'is_completed': 1,
-      },
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    return await db.insert('completed_rounds', {
+      'id': round.id,
+      'course_id': round.courseId,
+      'course_name': round.courseName,
+      'tee_box': round.teeBox,
+      'game_format': round.gameFormat,
+      'played_at': round.playedAt.toIso8601String(),
+      'player_scores_json': jsonEncode(round.toJson()['playerScores']),
+      'gross_score': gross,
+      'net_score': net,
+      'is_completed': 1,
+    }, conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<List<Map<String, dynamic>>> getCompletedRounds() async {
@@ -223,14 +225,20 @@ class DatabaseHelper {
 
   Future<void> recordClubShot(String clubId, int shotDistance) async {
     final db = await database;
-    final results = await db.query('club_bag', where: 'id = ?', whereArgs: [clubId]);
+    final results = await db.query(
+      'club_bag',
+      where: 'id = ?',
+      whereArgs: [clubId],
+    );
     if (results.isNotEmpty) {
       final current = results.first;
       final currentCarry = current['carryYards'] as int;
       final count = current['recordedShotsCount'] as int;
       final newCount = count + 1;
-      final updatedCarry = ((currentCarry * count + shotDistance) / newCount).round();
-      final updatedTotal = updatedCarry + ((current['totalYards'] as int) - currentCarry);
+      final updatedCarry = ((currentCarry * count + shotDistance) / newCount)
+          .round();
+      final updatedTotal =
+          updatedCarry + ((current['totalYards'] as int) - currentCarry);
 
       await db.update(
         'club_bag',
@@ -254,17 +262,22 @@ class DatabaseHelper {
 
   Future<int> insertSocialPost(SocialPostModel post) async {
     final db = await database;
-    return await db.insert('social_posts', post.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
+    return await db.insert(
+      'social_posts',
+      post.toJson(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 
-  Future<void> updatePostLikes(String postId, int likesCount, bool isLiked) async {
+  Future<void> updatePostLikes(
+    String postId,
+    int likesCount,
+    bool isLiked,
+  ) async {
     final db = await database;
     await db.update(
       'social_posts',
-      {
-        'likesCount': likesCount,
-        'isLikedByMe': isLiked ? 1 : 0,
-      },
+      {'likesCount': likesCount, 'isLikedByMe': isLiked ? 1 : 0},
       where: 'id = ?',
       whereArgs: [postId],
     );
@@ -285,11 +298,14 @@ class DatabaseHelper {
   Future<int> insertComment(SocialCommentModel comment) async {
     final db = await database;
     final res = await db.insert('social_comments', comment.toJson());
-    await db.rawUpdate('''
+    await db.rawUpdate(
+      '''
       UPDATE social_posts 
       SET commentsCount = commentsCount + 1 
       WHERE id = ?
-    ''', [comment.postId]);
+    ''',
+      [comment.postId],
+    );
     return res;
   }
 }

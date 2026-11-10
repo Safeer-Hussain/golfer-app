@@ -1,28 +1,50 @@
-# Golfer Autonomous Daily Sprint Rule
+# Golfer Autonomous Engineering Governance & Sprint Execution Rules
 
-When the user prompts **"run daily sprint"** (or similar phrasing):
+When the user prompts **"run daily sprint"** (or "run sprint" / "next sprint" / "daily sprint"):
 
-1. **Locate Next Task**:
-   - Inspect `docs/AUTONOMOUS_BACKLOG.md`.
-   - Find the first unchecked sprint item formatted as `- [ ] **Sprint X: ...**`.
+Strictly execute the following **Mandatory 6-Phase Protocol** sequentially without skipping any phase:
 
-2. **Autonomous Implementation**:
-   - Implement the complete user-facing capability, controllers, domain models, and UI widgets following Clean Architecture & MVVM standards.
-   - Strictly adhere to:
-     - Zero hardcoded colors (resolve dynamically via `Theme.of(context).colorScheme`).
-     - Unique hero tags on any `FloatingActionButton`.
-     - Zero emojis in source code, logs, or UI strings.
-     - Zero `// TODO` or tutorial comments.
-     - Landscape safe 800x360 layout.
-     - Wrap forms with inline validation.
+### MANDATORY 6-PHASE PROTOCOL FOR "run daily sprint"
 
-3. **Automated Verification**:
-   - Write corresponding automated unit and/or widget tests in `test/unit/` or `test/widget/`.
-   - Run `flutter analyze` and ensure 0 issues found.
-   - Run `flutter test` and ensure 100% test pass rate.
+#### PHASE 1: PRE-FLIGHT HEALTH CHECK (BEFORE TOUCHING NEW CODE)
+- Never start a new feature on a broken or dirty repository.
+- Run:
+  1. `git status` and `git pull --rebase origin main` (ensure local branch is synced with GitHub).
+  2. `flutter pub get`
+  3. `flutter analyze`
+  4. `flutter test`
+- If ANY pre-flight error, warning, or unpushed commit exists from a previous session, fix and resolve it FIRST before reading the backlog.
 
-4. **Mark Done & Push**:
-   - Mark the completed sprint item in `docs/AUTONOMOUS_BACKLOG.md` as `- [x] **Sprint X: ...**`.
-   - Commit the changes with conventional commit format: `feat(sprint-X): <sprint title>`.
-   - Push commit to `origin main`.
-   - Report concise completion summary to the user.
+#### PHASE 2: BACKLOG SELECTION & ARCHITECTURAL PLANNING
+- Open `docs/AUTONOMOUS_BACKLOG.md` and select the first `[ ]` item.
+- If all items in `docs/AUTONOMOUS_BACKLOG.md` are marked `[x]`, autonomously generate 15 new senior-level architectural or feature sprints in `docs/AUTONOMOUS_BACKLOG.md` and select the first new `[ ]` item.
+
+#### PHASE 3: PRODUCTION IMPLEMENTATION & UI SAFETY
+- Implement the selected feature end-to-end across `data/`, `domain/`, and `presentation/` following SOLID, DRY, and Clean Architecture.
+- Enforce strict UI & Runtime Safety:
+  - Zero emojis anywhere in code, UI strings, logs, or commit messages. Use vector Material Symbols / Cupertino / Lucide icons exclusively.
+  - Zero hardcoded colors (`Theme.of(context).colorScheme` only; test both Dark and Light mode parity).
+  - Explicit unique `heroTag` on every `FloatingActionButton`.
+  - 360dp-height landscape safety (independent scroll controllers, explicit `mainAxisExtent` on grids, edge-to-edge charts, compact paddings).
+  - Every button, chip, dialog, and share sheet must be 100% wired and functional (`AppFeedback` toasts + inline form validation).
+  - Zero `// TODO` or tutorial comments.
+
+#### PHASE 4: AUTOMATED & LIVE DEVICE RUNTIME VERIFICATION
+- Add or update unit and widget tests in `test/` covering the new feature AND verifying zero landscape overflow (800x360 viewport).
+- Execute `dart run tool/sprint_gate.dart` (or run the full sequence: `flutter pub get` -> `dart format lib test` -> `flutter analyze` -> `flutter test`).
+- LIVE DEVICE RUN CHECK: If a physical device is connected via USB, run the app on the connected device, wait for the SplashView transition to the main shell, and inspect runtime logs (`adb logcat -d` / console output). If ANY runtime error, `Hero` tag collision, state warning, or layout overflow appears on the device, fix the code and re-run until 0 runtime issues occur.
+
+#### PHASE 5: ATOMIC GIT COMMIT & GUARANTEED GITHUB PUSH
+- Mark the completed item as `[x]` in `docs/AUTONOMOUS_BACKLOG.md`.
+- Stage all files: `git add -A`
+- Commit with a clean conventional commit message (no emojis) passing `--no-gpg-sign`:
+  `git commit --no-gpg-sign -m "feat(<module>): <concise senior description>"`
+- Push to GitHub:
+  `git push origin main`
+
+#### PHASE 6: POST-PUSH PROOF VERIFICATION (NEVER SKIP)
+- After running `git push origin main`, you MUST execute:
+  `git status -sb` AND `git log origin/main..HEAD --oneline`
+- Verify that `git log origin/main..HEAD` returns 0 unpushed commits and working tree is 100% clean.
+- If the push failed due to network timeout or remote changes, run `git pull --rebase origin main` and `git push origin main` again until remote sync is confirmed.
+- Report the exact Commit SHA, modified files, test count, device runtime status, and confirmed `origin/main` push status to the user.

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/utils/app_feedback.dart';
 import '../clubhouse_controller.dart';
 
 class PostMilestoneModal extends StatefulWidget {
   final ClubhouseController controller;
 
-  const PostMilestoneModal({
-    super.key,
-    required this.controller,
-  });
+  const PostMilestoneModal({super.key, required this.controller});
 
   @override
   State<PostMilestoneModal> createState() => _PostMilestoneModalState();
@@ -16,7 +14,9 @@ class PostMilestoneModal extends StatefulWidget {
 
 class _PostMilestoneModalState extends State<PostMilestoneModal> {
   final _formKey = GlobalKey<FormState>();
-  final _courseController = TextEditingController(text: 'Lahore Garrison Golf & CC');
+  final _courseController = TextEditingController(
+    text: 'Lahore Garrison Golf & CC',
+  );
   final _scoreController = TextEditingController(text: '71');
   final _diffController = TextEditingController(text: '-1');
   final _textController = TextEditingController();
@@ -45,7 +45,10 @@ class _PostMilestoneModalState extends State<PostMilestoneModal> {
 
       if (!mounted) return;
       Navigator.of(context).pop();
-      AppFeedback.showSuccess(context, 'Milestone published to Clubhouse Feed.');
+      AppFeedback.showSuccess(
+        context,
+        'Milestone published to Clubhouse Feed.',
+      );
     }
   }
 
@@ -78,7 +81,10 @@ class _PostMilestoneModalState extends State<PostMilestoneModal> {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.close_rounded, color: colorScheme.onSurfaceVariant),
+                      icon: Icon(
+                        Icons.close_rounded,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                   ],
@@ -89,10 +95,14 @@ class _PostMilestoneModalState extends State<PostMilestoneModal> {
                   decoration: InputDecoration(
                     labelText: 'Golf Course',
                     prefixIcon: const Icon(Icons.golf_course_rounded),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                   validator: (val) {
-                    if (val == null || val.trim().isEmpty) return 'Course name cannot be empty';
+                    if (val == null || val.trim().isEmpty) {
+                      return 'Course name cannot be empty';
+                    }
                     return null;
                   },
                 ),
@@ -105,13 +115,21 @@ class _PostMilestoneModalState extends State<PostMilestoneModal> {
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           labelText: 'Gross Score',
-                          prefixIcon: const Icon(Icons.format_list_numbered_rounded),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                          prefixIcon: const Icon(
+                            Icons.format_list_numbered_rounded,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
                         validator: (val) {
-                          if (val == null || val.trim().isEmpty) return 'Enter score';
+                          if (val == null || val.trim().isEmpty) {
+                            return 'Enter score';
+                          }
                           final num = int.tryParse(val.trim());
-                          if (num == null || num < 50 || num > 160) return 'Invalid score';
+                          if (num == null || num < 50 || num > 160) {
+                            return 'Invalid score';
+                          }
                           return null;
                         },
                       ),
@@ -124,10 +142,14 @@ class _PostMilestoneModalState extends State<PostMilestoneModal> {
                           labelText: 'vs Par',
                           hintText: 'e.g. -2, E, +4',
                           prefixIcon: const Icon(Icons.trending_down_rounded),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
                         validator: (val) {
-                          if (val == null || val.trim().isEmpty) return 'Enter vs Par';
+                          if (val == null || val.trim().isEmpty) {
+                            return 'Enter vs Par';
+                          }
                           return null;
                         },
                       ),
@@ -141,10 +163,14 @@ class _PostMilestoneModalState extends State<PostMilestoneModal> {
                   decoration: InputDecoration(
                     labelText: 'Round Story / Milestone',
                     hintText: 'Share your round highlights, key shots, and course conditions...',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                   validator: (val) {
-                    if (val == null || val.trim().isEmpty) return 'Please enter some round thoughts';
+                    if (val == null || val.trim().isEmpty) {
+                      return 'Please enter some round thoughts';
+                    }
                     return null;
                   },
                 ),
@@ -152,12 +178,17 @@ class _PostMilestoneModalState extends State<PostMilestoneModal> {
                 ElevatedButton.icon(
                   onPressed: _submit,
                   icon: const Icon(Icons.publish_rounded, size: 18),
-                  label: const Text('Publish Milestone', style: TextStyle(fontWeight: FontWeight.bold)),
+                  label: const Text(
+                    'Publish Milestone',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: colorScheme.primary,
                     foregroundColor: colorScheme.onPrimary,
                     padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                 ),
               ],

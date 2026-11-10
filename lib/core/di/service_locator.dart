@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../network/network_service.dart';
 import '../storage/database_helper.dart';
 import '../storage/preferences_service.dart';
@@ -29,19 +30,29 @@ Future<void> setupServiceLocator({SharedPreferences? mockPrefs}) async {
   // Storage & Core
   final prefsInstance = mockPrefs ?? await SharedPreferences.getInstance();
   sl.registerSingleton<SharedPreferences>(prefsInstance);
-  sl.registerSingleton<PreferencesService>(PreferencesService(sl<SharedPreferences>()));
+  sl.registerSingleton<PreferencesService>(
+    PreferencesService(sl<SharedPreferences>()),
+  );
   sl.registerSingleton<DatabaseHelper>(DatabaseHelper.instance);
 
   // Network
-  sl.registerSingleton<NetworkService>(NetworkService.create(sl<PreferencesService>()));
+  sl.registerSingleton<NetworkService>(
+    NetworkService.create(sl<PreferencesService>()),
+  );
 
   // Repositories
-  sl.registerSingleton<FlightRepository>(FlightRepository(sl<PreferencesService>()));
+  sl.registerSingleton<FlightRepository>(
+    FlightRepository(sl<PreferencesService>()),
+  );
   sl.registerSingleton<ScorecardRepository>(
     ScorecardRepository(sl<PreferencesService>(), sl<DatabaseHelper>()),
   );
-  sl.registerSingleton<ClubBagRepository>(ClubBagRepository(sl<DatabaseHelper>()));
-  sl.registerSingleton<ClubhouseRepository>(ClubhouseRepository(sl<DatabaseHelper>()));
+  sl.registerSingleton<ClubBagRepository>(
+    ClubBagRepository(sl<DatabaseHelper>()),
+  );
+  sl.registerSingleton<ClubhouseRepository>(
+    ClubhouseRepository(sl<DatabaseHelper>()),
+  );
 
   // Use Cases
   sl.registerSingleton<CalculateScoreUseCase>(CalculateScoreUseCase());
@@ -50,7 +61,9 @@ Future<void> setupServiceLocator({SharedPreferences? mockPrefs}) async {
   sl.registerSingleton<GreenReadingUseCase>(GreenReadingUseCase());
 
   // Controllers
-  sl.registerSingleton<ThemeController>(ThemeController(sl<PreferencesService>()));
+  sl.registerSingleton<ThemeController>(
+    ThemeController(sl<PreferencesService>()),
+  );
 
   final flightSetupController = FlightSetupController(sl<FlightRepository>());
   sl.registerSingleton<FlightSetupController>(flightSetupController);
@@ -61,7 +74,9 @@ Future<void> setupServiceLocator({SharedPreferences? mockPrefs}) async {
     sl<CalculateScoreUseCase>(),
     sl<ClubhouseRepository>(),
   );
-  scorecardController.initializeWithFlight(flightSetupController.getCurrentFlightModel());
+  scorecardController.initializeWithFlight(
+    flightSetupController.getCurrentFlightModel(),
+  );
   sl.registerSingleton<ScorecardController>(scorecardController);
 
   final rangefinderController = RangefinderController(

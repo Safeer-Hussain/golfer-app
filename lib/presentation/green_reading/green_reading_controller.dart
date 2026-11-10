@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../domain/entities/green_reading_entity.dart';
 import '../../domain/usecases/green_reading_usecase.dart';
 
@@ -8,9 +9,9 @@ class GreenReadingController extends ChangeNotifier {
   GreenSlopeReading _reading = const GreenSlopeReading(
     slopeDegrees: 1.5,
     fallLineHeadingDegrees: 90.0, // Fall line heading East
-    stimpSpeed: 10.5,             // Country Club standard stimp
+    stimpSpeed: 10.5, // Country Club standard stimp
     puttDistanceFeet: 15.0,
-    puttHeadingDegrees: 0.0,      // Putting North
+    puttHeadingDegrees: 0.0, // Putting North
   );
 
   GreenReadingController(this._useCase);
@@ -18,12 +19,12 @@ class GreenReadingController extends ChangeNotifier {
   GreenSlopeReading get reading => _reading;
 
   PuttCalculationResult get calculationResult => _useCase.calculatePuttBreak(
-        slopeDegrees: _reading.slopeDegrees,
-        fallLineHeadingDegrees: _reading.fallLineHeadingDegrees,
-        stimpSpeed: _reading.stimpSpeed,
-        puttDistanceFeet: _reading.puttDistanceFeet,
-        puttHeadingDegrees: _reading.puttHeadingDegrees,
-      );
+    slopeDegrees: _reading.slopeDegrees,
+    fallLineHeadingDegrees: _reading.fallLineHeadingDegrees,
+    stimpSpeed: _reading.stimpSpeed,
+    puttDistanceFeet: _reading.puttDistanceFeet,
+    puttHeadingDegrees: _reading.puttHeadingDegrees,
+  );
 
   void setSlopeDegrees(double degrees) {
     _reading = _reading.copyWith(slopeDegrees: degrees.clamp(0.0, 6.0));
@@ -41,7 +42,9 @@ class GreenReadingController extends ChangeNotifier {
   }
 
   void setPuttDistance(double distanceFeet) {
-    _reading = _reading.copyWith(puttDistanceFeet: distanceFeet.clamp(3.0, 60.0));
+    _reading = _reading.copyWith(
+      puttDistanceFeet: distanceFeet.clamp(3.0, 60.0),
+    );
     notifyListeners();
   }
 

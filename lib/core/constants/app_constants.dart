@@ -1,11 +1,13 @@
 class AppConstants {
   static const String appName = 'Golfer';
   static const String appVersion = '1.0.0+1';
-  static const String appSubheading = 'Championship Multi-Player Flight & AI Caddie';
+  static const String appSubheading =
+      'Championship Multi-Player Flight & AI Caddie';
 
   // Persistence Keys
   static const String keyThemeMode = 'golfer_theme_mode';
-  static const String keyUnitSystem = 'golfer_unit_system'; // 'yards' or 'meters'
+  static const String keyUnitSystem =
+      'golfer_unit_system'; // 'yards' or 'meters'
   static const String keyActiveFlight = 'golfer_active_flight_json';
   static const String keyActiveRoundScorecard = 'golfer_active_scorecard_json';
   static const String keyActiveHoleIndex = 'golfer_active_hole_index';

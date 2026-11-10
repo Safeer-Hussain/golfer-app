@@ -63,7 +63,8 @@ class ClubModel {
       carryYards: (json['carryYards'] as num).toInt(),
       totalYards: (json['totalYards'] as num).toInt(),
       recordedShotsCount: (json['recordedShotsCount'] as num?)?.toInt() ?? 0,
-      imageAsset: json['imageAsset'] as String? ?? 'assets/images/club_iron.png',
+      imageAsset:
+          json['imageAsset'] as String? ?? 'assets/images/club_iron.png',
     );
   }
 

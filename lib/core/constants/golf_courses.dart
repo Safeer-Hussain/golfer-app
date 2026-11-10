@@ -1,4 +1,5 @@
 import 'package:latlong2/latlong.dart';
+
 import '../../domain/entities/course_entity.dart';
 import '../../domain/entities/hole_entity.dart';
 
@@ -29,7 +30,8 @@ class GolfCourses {
         elevationChangeFeet: 4,
         windSpeedMph: 11.0,
         windDirection: 'NW 11 mph',
-        hazardsDescription: 'Right fairway bunker at 265 yds, two greenside bunkers left.',
+        hazardsDescription:
+            'Right fairway bunker at 265 yds, two greenside bunkers left.',
       ),
       HoleEntity(
         holeNumber: 2,
@@ -47,7 +49,8 @@ class GolfCourses {
         elevationChangeFeet: -6,
         windSpeedMph: 9.0,
         windDirection: 'W 9 mph',
-        hazardsDescription: 'Water hazard hugging right side of green; bail out left.',
+        hazardsDescription:
+            'Water hazard hugging right side of green; bail out left.',
       ),
       HoleEntity(
         holeNumber: 3,
@@ -83,7 +86,8 @@ class GolfCourses {
         elevationChangeFeet: 8,
         windSpeedMph: 12.0,
         windDirection: 'NE 12 mph',
-        hazardsDescription: 'Dogleg right with out-of-bounds right; elevated green.',
+        hazardsDescription:
+            'Dogleg right with out-of-bounds right; elevated green.',
       ),
       HoleEntity(
         holeNumber: 5,
@@ -119,7 +123,8 @@ class GolfCourses {
         elevationChangeFeet: 0,
         windSpeedMph: 10.0,
         windDirection: 'SE 10 mph',
-        hazardsDescription: 'Fairway bunker left at 250 yds; precision approach required.',
+        hazardsDescription:
+            'Fairway bunker left at 250 yds; precision approach required.',
       ),
       HoleEntity(
         holeNumber: 7,
@@ -155,7 +160,8 @@ class GolfCourses {
         elevationChangeFeet: -8,
         windSpeedMph: 15.0,
         windDirection: 'SW 15 mph',
-        hazardsDescription: 'Downhill par 3; plays 1 club shorter with prevailing tailwind.',
+        hazardsDescription:
+            'Downhill par 3; plays 1 club shorter with prevailing tailwind.',
       ),
       HoleEntity(
         holeNumber: 9,
@@ -173,7 +179,8 @@ class GolfCourses {
         elevationChangeFeet: 3,
         windSpeedMph: 7.0,
         windDirection: 'W 7 mph',
-        hazardsDescription: 'Finishing front-9 hole leading back towards the clubhouse.',
+        hazardsDescription:
+            'Finishing front-9 hole leading back towards the clubhouse.',
       ),
       HoleEntity(
         holeNumber: 10,
@@ -191,7 +198,8 @@ class GolfCourses {
         elevationChangeFeet: 1,
         windSpeedMph: 10.0,
         windDirection: 'NW 10 mph',
-        hazardsDescription: 'Demanding start to the back-nine; narrow tree-lined fairway.',
+        hazardsDescription:
+            'Demanding start to the back-nine; narrow tree-lined fairway.',
       ),
       HoleEntity(
         holeNumber: 11,
@@ -209,7 +217,8 @@ class GolfCourses {
         elevationChangeFeet: 7,
         windSpeedMph: 13.0,
         windDirection: 'N 13 mph',
-        hazardsDescription: 'Double dogleg; requires strategic layup before greenside pond.',
+        hazardsDescription:
+            'Double dogleg; requires strategic layup before greenside pond.',
       ),
       HoleEntity(
         holeNumber: 12,
@@ -227,7 +236,8 @@ class GolfCourses {
         elevationChangeFeet: -4,
         windSpeedMph: 9.0,
         windDirection: 'NE 9 mph',
-        hazardsDescription: 'Island green aesthetic surrounded by deep white sand bunkers.',
+        hazardsDescription:
+            'Island green aesthetic surrounded by deep white sand bunkers.',
       ),
       HoleEntity(
         holeNumber: 13,
@@ -245,7 +255,8 @@ class GolfCourses {
         elevationChangeFeet: 10,
         windSpeedMph: 16.0,
         windDirection: 'NE 16 mph',
-        hazardsDescription: 'Stroke Index 2; uphill tee shot into the teeth of the wind.',
+        hazardsDescription:
+            'Stroke Index 2; uphill tee shot into the teeth of the wind.',
       ),
       HoleEntity(
         holeNumber: 14,
@@ -263,7 +274,8 @@ class GolfCourses {
         elevationChangeFeet: -2,
         windSpeedMph: 11.0,
         windDirection: 'E 11 mph',
-        hazardsDescription: 'Slight dogleg left; conservative 3-wood off tee is favored.',
+        hazardsDescription:
+            'Slight dogleg left; conservative 3-wood off tee is favored.',
       ),
       HoleEntity(
         holeNumber: 15,
@@ -281,7 +293,8 @@ class GolfCourses {
         elevationChangeFeet: 4,
         windSpeedMph: 12.0,
         windDirection: 'SE 12 mph',
-        hazardsDescription: 'Water in play on drive for mishits; green slopes toward water.',
+        hazardsDescription:
+            'Water in play on drive for mishits; green slopes toward water.',
       ),
       HoleEntity(
         holeNumber: 16,
@@ -299,7 +312,8 @@ class GolfCourses {
         elevationChangeFeet: -5,
         windSpeedMph: 14.0,
         windDirection: 'S 14 mph',
-        hazardsDescription: 'Crosswind par 3; club selection is crucial to avoid deep traps.',
+        hazardsDescription:
+            'Crosswind par 3; club selection is crucial to avoid deep traps.',
       ),
       HoleEntity(
         holeNumber: 17,
@@ -317,7 +331,8 @@ class GolfCourses {
         elevationChangeFeet: 6,
         windSpeedMph: 10.0,
         windDirection: 'SW 10 mph',
-        hazardsDescription: 'Risk-reward par 5; eagle opportunity with aggressive drive.',
+        hazardsDescription:
+            'Risk-reward par 5; eagle opportunity with aggressive drive.',
       ),
       HoleEntity(
         holeNumber: 18,
@@ -335,7 +350,8 @@ class GolfCourses {
         elevationChangeFeet: 2,
         windSpeedMph: 8.0,
         windDirection: 'W 8 mph',
-        hazardsDescription: 'Championship grandstand finish right in front of clubhouse patio.',
+        hazardsDescription:
+            'Championship grandstand finish right in front of clubhouse patio.',
       ),
     ],
   );

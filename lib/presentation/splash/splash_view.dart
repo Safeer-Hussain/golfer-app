@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../shell/adaptive_scaffold.dart';
 
 class SplashView extends StatefulWidget {
@@ -8,11 +9,13 @@ class SplashView extends StatefulWidget {
   State<SplashView> createState() => _SplashViewState();
 }
 
-class _SplashViewState extends State<SplashView> with SingleTickerProviderStateMixin {
+class _SplashViewState extends State<SplashView>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animController;
   late Animation<double> _scaleAnimation;
   late Animation<double> _fadeAnimation;
-  String _statusText = 'Initializing GetIt service locator & SharedPreferences state...';
+  String _statusText =
+      'Initializing GetIt service locator & SharedPreferences state...';
 
   @override
   void initState() {
@@ -26,9 +29,10 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
       CurvedAnimation(parent: _animController, curve: Curves.easeOutCubic),
     );
 
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _animController, curve: Curves.easeIn),
-    );
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _animController, curve: Curves.easeIn));
 
     _animController.forward();
 
@@ -56,7 +60,8 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
     Navigator.of(context).pushReplacement(
       PageRouteBuilder(
         transitionDuration: const Duration(milliseconds: 500),
-        pageBuilder: (context, animation, secondaryAnimation) => const AdaptiveScaffold(),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const AdaptiveScaffold(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return FadeTransition(opacity: animation, child: child);
         },
@@ -134,7 +139,9 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
                 height: 28,
                 child: CircularProgressIndicator(
                   strokeWidth: 2.5,
-                  valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    colorScheme.primary,
+                  ),
                 ),
               ),
               const SizedBox(height: 20),

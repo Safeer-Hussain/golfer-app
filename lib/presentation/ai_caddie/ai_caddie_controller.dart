@@ -1,5 +1,7 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+
 import '../../core/constants/golf_courses.dart';
 import '../../data/models/club_model.dart';
 import '../../data/repositories/club_bag_repository.dart';
@@ -66,7 +68,8 @@ class AiCaddieController extends ChangeNotifier {
     _messages.add(
       CaddieChatMessage(
         id: 'msg_welcome',
-        text: 'Caddie AI online. Synchronized with hole ${currentHole.holeNumber} (${currentHole.yardageForTee(_teeBox)} yards, Par ${currentHole.par}, SI ${currentHole.strokeIndex}). Current atmospheric conditions: ${currentHole.windDirection}. How would you like to attack this hole?',
+        text:
+            'Caddie AI online. Synchronized with hole ${currentHole.holeNumber} (${currentHole.yardageForTee(_teeBox)} yards, Par ${currentHole.par}, SI ${currentHole.strokeIndex}). Current atmospheric conditions: ${currentHole.windDirection}. How would you like to attack this hole?',
         isUser: false,
         timestamp: DateTime.now(),
       ),
@@ -90,7 +93,8 @@ class AiCaddieController extends ChangeNotifier {
 
   Future<void> _generateStreamingResponse(String prompt) async {
     _isStreaming = true;
-    _streamingStatusText = 'Calculating carry yardage, wind head-component & dispersion...';
+    _streamingStatusText =
+        'Calculating carry yardage, wind head-component & dispersion...';
     notifyListeners();
 
     try {
@@ -109,16 +113,24 @@ class AiCaddieController extends ChangeNotifier {
       String fullResponse;
       final lower = prompt.toLowerCase();
 
-      if (lower.contains('recommend') || lower.contains('club') || lower.contains('hole')) {
-        fullResponse = 'Hole ${currentHole.holeNumber} Strategy: Laser distance reads ${rec.rawYardage} yards. Factoring in ${currentHole.windDirection} (+${rec.windAdjustmentYards} yds) and ${currentHole.elevationChangeFeet} ft elevation (+${rec.elevationAdjustmentYards} yds), this shot plays like ${rec.playsLikeYardage} yards.\n\nOptimal Club: ${rec.recommendedClub.name} (${rec.recommendedClub.loft}, calibrated carry: ${rec.recommendedClub.carryYards} yds).\n\nAim line: ${rec.aimLineAdjustment}\nNotes: ${rec.strategyNotes}';
-      } else if (lower.contains('putting') || lower.contains('gir') || lower.contains('front-9')) {
-        fullResponse = 'Performance Trend Analysis: Your current FIR is trending at 71% with strong dispersion control. Putting efficiency sits at 1.7 putts per GIR. On firm greens, leave putts below the cup to give yourself uphill birdie opportunities. Avoid short-siding on hole ${currentHole.holeNumber}.';
+      if (lower.contains('recommend') ||
+          lower.contains('club') ||
+          lower.contains('hole')) {
+        fullResponse =
+            'Hole ${currentHole.holeNumber} Strategy: Laser distance reads ${rec.rawYardage} yards. Factoring in ${currentHole.windDirection} (+${rec.windAdjustmentYards} yds) and ${currentHole.elevationChangeFeet} ft elevation (+${rec.elevationAdjustmentYards} yds), this shot plays like ${rec.playsLikeYardage} yards.\n\nOptimal Club: ${rec.recommendedClub.name} (${rec.recommendedClub.loft}, calibrated carry: ${rec.recommendedClub.carryYards} yds).\n\nAim line: ${rec.aimLineAdjustment}\nNotes: ${rec.strategyNotes}';
+      } else if (lower.contains('putting') ||
+          lower.contains('gir') ||
+          lower.contains('front-9')) {
+        fullResponse =
+            'Performance Trend Analysis: Your current FIR is trending at 71% with strong dispersion control. Putting efficiency sits at 1.7 putts per GIR. On firm greens, leave putts below the cup to give yourself uphill birdie opportunities. Avoid short-siding on hole ${currentHole.holeNumber}.';
       } else if (lower.contains('layup') || lower.contains('safe')) {
-        fullResponse = 'Conservative Layup Route: Rather than challenging the ${currentHole.hazardsDescription}, select a 5-Iron or 6-Iron off the tee to land at the 120-yard marker. This leaves a full Pitching Wedge into the widest section of the green, eliminating double-bogey risks completely.';
+        fullResponse =
+            'Conservative Layup Route: Rather than challenging the ${currentHole.hazardsDescription}, select a 5-Iron or 6-Iron off the tee to land at the 120-yard marker. This leaves a full Pitching Wedge into the widest section of the green, eliminating double-bogey risks completely.';
       } else if (lower.contains('slice') || lower.contains('driver')) {
         fullResponse = 'Driver Slice Mitigation: Ensure ball position is positioned off the inside of your lead heel. At takeaway, maintain a wide takeaway arc and initiate the downswing with lower body rotation to prevent an out-to-in steep path. Favor a fairway target 7 yards left of center.';
       } else {
-        fullResponse = 'Hole ${currentHole.holeNumber} Insight: ${rec.strategyNotes}. Recommended club for current ${rec.playsLikeYardage} yds adjusted distance is ${rec.recommendedClub.name}. Target the safe side of the green to secure a routine two-putt.';
+        fullResponse =
+            'Hole ${currentHole.holeNumber} Insight: ${rec.strategyNotes}. Recommended club for current ${rec.playsLikeYardage} yds adjusted distance is ${rec.recommendedClub.name}. Target the safe side of the green to secure a routine two-putt.';
       }
 
       // Token-by-token streaming simulation
@@ -128,7 +140,7 @@ class AiCaddieController extends ChangeNotifier {
 
       for (int i = 0; i < words.length; i++) {
         currentText += (i == 0 ? '' : ' ') + words[i];
-        
+
         final partialMessage = CaddieChatMessage(
           id: responseId,
           text: currentText,

@@ -7,7 +7,8 @@ class RoundScorecardModel {
   final String teeBox;
   final String gameFormat;
   final DateTime playedAt;
-  final Map<String, List<HoleScoreModel>> playerScores; // playerId -> 18 hole scores
+  final Map<String, List<HoleScoreModel>>
+  playerScores; // playerId -> 18 hole scores
   final bool isCompleted;
 
   const RoundScorecardModel({
@@ -108,7 +109,9 @@ class RoundScorecardModel {
     rawScores.forEach((key, value) {
       if (value is List) {
         parsedScores[key] = value
-            .map((item) => HoleScoreModel.fromJson(item as Map<String, dynamic>))
+            .map(
+              (item) => HoleScoreModel.fromJson(item as Map<String, dynamic>),
+            )
             .toList();
       }
     });

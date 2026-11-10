@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 class HandicapAnalyticsTab extends StatelessWidget {
   const HandicapAnalyticsTab({super.key});
 
-  Widget _buildKpiCard(BuildContext context, String label, String value, IconData icon, Color color) {
+  Widget _buildKpiCard(
+    BuildContext context,
+    String label,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Container(
@@ -46,7 +52,13 @@ class HandicapAnalyticsTab extends StatelessWidget {
     );
   }
 
-  Widget _buildStatProgress(BuildContext context, String label, String pctStr, double value, Color color) {
+  Widget _buildStatProgress(
+    BuildContext context,
+    String label,
+    String pctStr,
+    double value,
+    Color color,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Padding(
@@ -59,11 +71,19 @@ class HandicapAnalyticsTab extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: colorScheme.onSurface,
+                ),
               ),
               Text(
                 pctStr,
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: color),
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: color,
+                ),
               ),
             ],
           ),
@@ -99,10 +119,34 @@ class HandicapAnalyticsTab extends StatelessWidget {
             crossAxisSpacing: 10,
             childAspectRatio: 1.8,
             children: [
-              _buildKpiCard(context, 'HANDICAP INDEX', '4.2', Icons.trending_down_rounded, colorScheme.primary),
-              _buildKpiCard(context, 'SCORING AVERAGE', '72.5', Icons.bar_chart_rounded, colorScheme.secondary),
-              _buildKpiCard(context, 'BEST ROUND (18)', '68 (-4)', Icons.emoji_events_outlined, colorScheme.secondary),
-              _buildKpiCard(context, 'PUTTS PER ROUND', '29.2', Icons.sports_golf_rounded, colorScheme.primary),
+              _buildKpiCard(
+                context,
+                'HANDICAP INDEX',
+                '4.2',
+                Icons.trending_down_rounded,
+                colorScheme.primary,
+              ),
+              _buildKpiCard(
+                context,
+                'SCORING AVERAGE',
+                '72.5',
+                Icons.bar_chart_rounded,
+                colorScheme.secondary,
+              ),
+              _buildKpiCard(
+                context,
+                'BEST ROUND (18)',
+                '68 (-4)',
+                Icons.emoji_events_outlined,
+                colorScheme.secondary,
+              ),
+              _buildKpiCard(
+                context,
+                'PUTTS PER ROUND',
+                '29.2',
+                Icons.sports_golf_rounded,
+                colorScheme.primary,
+              ),
             ],
           ),
           const SizedBox(height: 18),
@@ -130,13 +174,39 @@ class HandicapAnalyticsTab extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Container(width: 8, height: 8, decoration: BoxDecoration(color: colorScheme.primary, shape: BoxShape.circle)),
+                        Container(
+                          width: 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: colorScheme.primary,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
                         const SizedBox(width: 4),
-                        Text('Score', style: TextStyle(fontSize: 10, color: colorScheme.onSurfaceVariant)),
+                        Text(
+                          'Score',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                        ),
                         const SizedBox(width: 10),
-                        Container(width: 8, height: 8, decoration: BoxDecoration(color: colorScheme.secondary, shape: BoxShape.circle)),
+                        Container(
+                          width: 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: colorScheme.secondary,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
                         const SizedBox(width: 4),
-                        Text('HCP Index', style: TextStyle(fontSize: 10, color: colorScheme.onSurfaceVariant)),
+                        Text(
+                          'HCP Index',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -151,16 +221,24 @@ class HandicapAnalyticsTab extends StatelessWidget {
                         show: true,
                         drawVerticalLine: false,
                         getDrawingHorizontalLine: (value) => FlLine(
-                          color: colorScheme.outlineVariant.withValues(alpha: 0.4),
+                          color: colorScheme.outlineVariant.withValues(
+                            alpha: 0.4,
+                          ),
                           strokeWidth: 1,
                         ),
                       ),
                       titlesData: FlTitlesData(
                         rightTitles: const AxisTitles(
-                          sideTitles: SideTitles(showTitles: false, reservedSize: 0),
+                          sideTitles: SideTitles(
+                            showTitles: false,
+                            reservedSize: 0,
+                          ),
                         ),
                         topTitles: const AxisTitles(
-                          sideTitles: SideTitles(showTitles: false, reservedSize: 0),
+                          sideTitles: SideTitles(
+                            showTitles: false,
+                            reservedSize: 0,
+                          ),
                         ),
                         bottomTitles: AxisTitles(
                           sideTitles: SideTitles(
@@ -168,12 +246,24 @@ class HandicapAnalyticsTab extends StatelessWidget {
                             reservedSize: 22,
                             interval: 1,
                             getTitlesWidget: (val, meta) {
-                              const labels = ['R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'R7', 'R8'];
+                              const labels = [
+                                'R1',
+                                'R2',
+                                'R3',
+                                'R4',
+                                'R5',
+                                'R6',
+                                'R7',
+                                'R8',
+                              ];
                               final i = val.toInt();
                               if (i >= 0 && i < labels.length) {
                                 return Text(
                                   labels[i],
-                                  style: TextStyle(fontSize: 10, color: colorScheme.onSurfaceVariant),
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: colorScheme.onSurfaceVariant,
+                                  ),
                                 );
                               }
                               return const SizedBox.shrink();
@@ -187,7 +277,10 @@ class HandicapAnalyticsTab extends StatelessWidget {
                             getTitlesWidget: (val, meta) {
                               return Text(
                                 '${val.toInt()}',
-                                style: TextStyle(fontSize: 9, color: colorScheme.onSurfaceVariant),
+                                style: TextStyle(
+                                  fontSize: 9,
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
                               );
                             },
                           ),
@@ -249,10 +342,34 @@ class HandicapAnalyticsTab extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                _buildStatProgress(context, 'Fairways in Regulation (FIR)', '74%', 0.74, colorScheme.primary),
-                _buildStatProgress(context, 'Greens in Regulation (GIR)', '68%', 0.68, colorScheme.primary),
-                _buildStatProgress(context, 'Scrambling / Sand Saves', '58%', 0.58, colorScheme.secondary),
-                _buildStatProgress(context, 'Par-3 Scoring Efficiency', '3.1 Avg', 0.82, colorScheme.secondary),
+                _buildStatProgress(
+                  context,
+                  'Fairways in Regulation (FIR)',
+                  '74%',
+                  0.74,
+                  colorScheme.primary,
+                ),
+                _buildStatProgress(
+                  context,
+                  'Greens in Regulation (GIR)',
+                  '68%',
+                  0.68,
+                  colorScheme.primary,
+                ),
+                _buildStatProgress(
+                  context,
+                  'Scrambling / Sand Saves',
+                  '58%',
+                  0.58,
+                  colorScheme.secondary,
+                ),
+                _buildStatProgress(
+                  context,
+                  'Par-3 Scoring Efficiency',
+                  '3.1 Avg',
+                  0.82,
+                  colorScheme.secondary,
+                ),
               ],
             ),
           ),

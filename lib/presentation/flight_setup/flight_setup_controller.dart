@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+
 import '../../core/constants/golf_courses.dart';
 import '../../core/utils/handicap_calculator.dart';
 import '../../data/models/flight_model.dart';
@@ -45,7 +46,9 @@ class FlightSetupController extends ChangeNotifier {
 
   void selectTee(String tee) {
     _selectedTee = tee;
-    _flightPlayers = _flightPlayers.map((p) => p.copyWith(teeBox: tee)).toList();
+    _flightPlayers = _flightPlayers
+        .map((p) => p.copyWith(teeBox: tee))
+        .toList();
     _recalculateCourseHandicaps();
     _persistFlight();
     notifyListeners();

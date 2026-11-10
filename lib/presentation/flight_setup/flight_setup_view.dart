@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../core/constants/app_constants.dart';
 import '../../core/constants/golf_courses.dart';
 import '../../core/di/service_locator.dart';
@@ -12,12 +13,12 @@ import 'widgets/tee_box_selector.dart';
 class FlightSetupView extends StatelessWidget {
   final VoidCallback onStartRound;
 
-  const FlightSetupView({
-    super.key,
-    required this.onStartRound,
-  });
+  const FlightSetupView({super.key, required this.onStartRound});
 
-  void _showAddCustomPlayer(BuildContext context, FlightSetupController controller) {
+  void _showAddCustomPlayer(
+    BuildContext context,
+    FlightSetupController controller,
+  ) {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
@@ -34,11 +35,14 @@ class FlightSetupView extends StatelessWidget {
     );
   }
 
-  void _showAddMemberModal(BuildContext context, FlightSetupController controller) {
+  void _showAddMemberModal(
+    BuildContext context,
+    FlightSetupController controller,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
-    final available = FlightRepository.availableClubMembers.where(
-      (m) => !controller.flightPlayers.any((p) => p.id == m.id),
-    ).toList();
+    final available = FlightRepository.availableClubMembers
+        .where((m) => !controller.flightPlayers.any((p) => p.id == m.id))
+        .toList();
 
     showModalBottomSheet<void>(
       context: context,
@@ -71,34 +75,36 @@ class FlightSetupView extends StatelessWidget {
                   ),
                 )
               else
-                ...available.map((member) => ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage(member.avatarAsset),
+                ...available.map(
+                  (member) => ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: CircleAvatar(
+                      backgroundImage: AssetImage(member.avatarAsset),
+                    ),
+                    title: Text(
+                      member.name,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.onSurface,
                       ),
-                      title: Text(
-                        member.name,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: colorScheme.onSurface,
-                        ),
+                    ),
+                    subtitle: Text(
+                      'Handicap Index: ${member.handicapIndex}',
+                      style: TextStyle(color: colorScheme.onSurfaceVariant),
+                    ),
+                    trailing: ElevatedButton(
+                      onPressed: () {
+                        controller.addMemberPlayer(member);
+                        Navigator.of(ctx).pop();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: colorScheme.primary,
+                        foregroundColor: colorScheme.onPrimary,
                       ),
-                      subtitle: Text(
-                        'Handicap Index: ${member.handicapIndex}',
-                        style: TextStyle(color: colorScheme.onSurfaceVariant),
-                      ),
-                      trailing: ElevatedButton(
-                        onPressed: () {
-                          controller.addMemberPlayer(member);
-                          Navigator.of(ctx).pop();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: colorScheme.primary,
-                          foregroundColor: colorScheme.onPrimary,
-                        ),
-                        child: const Text('Add'),
-                      ),
-                    )),
+                      child: const Text('Add'),
+                    ),
+                  ),
+                ),
             ],
           ),
         ),
@@ -106,7 +112,10 @@ class FlightSetupView extends StatelessWidget {
     );
   }
 
-  Widget _buildLeftPane(BuildContext context, FlightSetupController controller) {
+  Widget _buildLeftPane(
+    BuildContext context,
+    FlightSetupController controller,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return SingleChildScrollView(
@@ -142,7 +151,9 @@ class FlightSetupView extends StatelessWidget {
                       color: colorScheme.surfaceContainer,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: isSelected ? colorScheme.primary : colorScheme.outlineVariant,
+                        color: isSelected
+                            ? colorScheme.primary
+                            : colorScheme.outlineVariant,
                         width: isSelected ? 2.0 : 1.0,
                       ),
                     ),
@@ -154,10 +165,7 @@ class FlightSetupView extends StatelessWidget {
                           child: Stack(
                             fit: StackFit.expand,
                             children: [
-                              Image.asset(
-                                c.imageAsset,
-                                fit: BoxFit.cover,
-                              ),
+                              Image.asset(c.imageAsset, fit: BoxFit.cover),
                               if (isSelected)
                                 Positioned(
                                   top: 6,
@@ -229,35 +237,41 @@ class FlightSetupView extends StatelessWidget {
           Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: [
-              AppConstants.formatStrokePlay,
-              AppConstants.formatStableford,
-              AppConstants.formatMatchPlay,
-              AppConstants.formatScramble,
-            ].map((f) {
-              final isSel = f == controller.selectedFormat;
-              return ChoiceChip(
-                label: Text(
-                  f,
-                  style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: isSel ? FontWeight.bold : FontWeight.normal,
-                    color: isSel ? colorScheme.onPrimary : colorScheme.onSurface,
-                  ),
-                ),
-                selected: isSel,
-                selectedColor: colorScheme.primary,
-                backgroundColor: colorScheme.surfaceContainer,
-                onSelected: (_) => controller.selectFormat(f),
-              );
-            }).toList(),
+            children:
+                [
+                  AppConstants.formatStrokePlay,
+                  AppConstants.formatStableford,
+                  AppConstants.formatMatchPlay,
+                  AppConstants.formatScramble,
+                ].map((f) {
+                  final isSel = f == controller.selectedFormat;
+                  return ChoiceChip(
+                    label: Text(
+                      f,
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: isSel ? FontWeight.bold : FontWeight.normal,
+                        color: isSel
+                            ? colorScheme.onPrimary
+                            : colorScheme.onSurface,
+                      ),
+                    ),
+                    selected: isSel,
+                    selectedColor: colorScheme.primary,
+                    backgroundColor: colorScheme.surfaceContainer,
+                    onSelected: (_) => controller.selectFormat(f),
+                  );
+                }).toList(),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildRightPane(BuildContext context, FlightSetupController controller) {
+  Widget _buildRightPane(
+    BuildContext context,
+    FlightSetupController controller,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return SingleChildScrollView(
@@ -287,7 +301,10 @@ class FlightSetupView extends StatelessWidget {
                     TextButton.icon(
                       onPressed: () => _showAddMemberModal(context, controller),
                       icon: const Icon(Icons.group_add_outlined, size: 16),
-                      label: const Text('Member', style: TextStyle(fontSize: 11)),
+                      label: const Text(
+                        'Member',
+                        style: TextStyle(fontSize: 11),
+                      ),
                       style: TextButton.styleFrom(
                         foregroundColor: colorScheme.secondary,
                         padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -295,9 +312,16 @@ class FlightSetupView extends StatelessWidget {
                       ),
                     ),
                     TextButton.icon(
-                      onPressed: () => _showAddCustomPlayer(context, controller),
-                      icon: const Icon(Icons.person_add_alt_1_outlined, size: 16),
-                      label: const Text('Custom', style: TextStyle(fontSize: 11)),
+                      onPressed: () =>
+                          _showAddCustomPlayer(context, controller),
+                      icon: const Icon(
+                        Icons.person_add_alt_1_outlined,
+                        size: 16,
+                      ),
+                      label: const Text(
+                        'Custom',
+                        style: TextStyle(fontSize: 11),
+                      ),
                       style: TextButton.styleFrom(
                         foregroundColor: colorScheme.primary,
                         padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -327,7 +351,11 @@ class FlightSetupView extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Icon(Icons.sports_golf_rounded, color: colorScheme.secondary, size: 28),
+                Icon(
+                  Icons.sports_golf_rounded,
+                  color: colorScheme.secondary,
+                  size: 28,
+                ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -360,7 +388,9 @@ class FlightSetupView extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: () async {
                 await controller.saveAndStartRound();
-                sl<ScorecardController>().initializeWithFlight(controller.getCurrentFlightModel());
+                sl<ScorecardController>().initializeWithFlight(
+                  controller.getCurrentFlightModel(),
+                );
                 onStartRound();
               },
               icon: const Icon(Icons.play_arrow_rounded, size: 20),
@@ -372,7 +402,9 @@ class FlightSetupView extends StatelessWidget {
                 backgroundColor: colorScheme.primary,
                 foregroundColor: colorScheme.onPrimary,
                 padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
             ),
           ),
@@ -385,7 +417,8 @@ class FlightSetupView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = sl<FlightSetupController>();
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return ListenableBuilder(
       listenable: controller,
@@ -395,7 +428,10 @@ class FlightSetupView extends StatelessWidget {
               ? Row(
                   children: [
                     Expanded(child: _buildLeftPane(context, controller)),
-                    VerticalDivider(width: 1, color: Theme.of(context).colorScheme.outlineVariant),
+                    VerticalDivider(
+                      width: 1,
+                      color: Theme.of(context).colorScheme.outlineVariant,
+                    ),
                     Expanded(child: _buildRightPane(context, controller)),
                   ],
                 )
@@ -413,7 +449,9 @@ class FlightSetupView extends StatelessWidget {
             heroTag: 'fab_flight_start',
             onPressed: () async {
               await controller.saveAndStartRound();
-              sl<ScorecardController>().initializeWithFlight(controller.getCurrentFlightModel());
+              sl<ScorecardController>().initializeWithFlight(
+                controller.getCurrentFlightModel(),
+              );
               onStartRound();
             },
             icon: const Icon(Icons.sports_golf_rounded),

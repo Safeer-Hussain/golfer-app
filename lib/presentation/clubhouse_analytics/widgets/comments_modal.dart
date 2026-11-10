@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../data/models/social_post_model.dart';
 import '../clubhouse_controller.dart';
 
@@ -66,7 +67,10 @@ class _CommentsModalState extends State<CommentsModal> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -79,7 +83,10 @@ class _CommentsModalState extends State<CommentsModal> {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.close_rounded, color: colorScheme.onSurfaceVariant),
+                      icon: Icon(
+                        Icons.close_rounded,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                   ],
@@ -95,89 +102,115 @@ class _CommentsModalState extends State<CommentsModal> {
                         ),
                       )
                     : _comments.isEmpty
-                        ? Center(
-                            child: Text(
-                              'No comments yet. Start the conversation!',
-                              style: TextStyle(color: colorScheme.onSurfaceVariant),
-                            ),
-                          )
-                        : ListView.builder(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                            itemCount: _comments.length,
-                            itemBuilder: (context, index) {
-                              final comment = _comments[index];
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 6),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 14,
-                                      backgroundImage: AssetImage(comment.authorAvatar),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Expanded(
-                                      child: Container(
-                                        padding: const EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                          color: colorScheme.surfaceContainerHighest,
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              comment.authorName,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 12,
-                                                color: colorScheme.onSurface,
-                                              ),
-                                            ),
-                                            const SizedBox(height: 2),
-                                            Text(
-                                              comment.content,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                color: colorScheme.onSurface,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                    ? Center(
+                        child: Text(
+                          'No comments yet. Start the conversation!',
+                          style: TextStyle(color: colorScheme.onSurfaceVariant),
+                        ),
+                      )
+                    : ListView.builder(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+                        itemCount: _comments.length,
+                        itemBuilder: (context, index) {
+                          final comment = _comments[index];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 6),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CircleAvatar(
+                                  radius: 14,
+                                  backgroundImage: AssetImage(
+                                    comment.authorAvatar,
+                                  ),
                                 ),
-                              );
-                            },
-                          ),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color:
+                                          colorScheme.surfaceContainerHighest,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          comment.authorName,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12,
+                                            color: colorScheme.onSurface,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 2),
+                                        Text(
+                                          comment.content,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: colorScheme.onSurface,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: colorScheme.surfaceContainer,
-                  border: Border(top: BorderSide(color: colorScheme.outlineVariant)),
+                  border: Border(
+                    top: BorderSide(color: colorScheme.outlineVariant),
+                  ),
                 ),
                 child: Row(
                   children: [
                     Expanded(
                       child: TextField(
                         controller: _commentInputController,
-                        style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: colorScheme.onSurface,
+                        ),
                         decoration: InputDecoration(
                           hintText: 'Add a comment...',
-                          hintStyle: TextStyle(fontSize: 12, color: colorScheme.onSurfaceVariant),
+                          hintStyle: TextStyle(
+                            fontSize: 12,
+                            color: colorScheme.onSurfaceVariant,
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(color: colorScheme.outlineVariant),
+                            borderSide: BorderSide(
+                              color: colorScheme.outlineVariant,
+                            ),
                           ),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 8,
+                          ),
                         ),
                       ),
                     ),
                     const SizedBox(width: 8),
                     IconButton(
-                      icon: Icon(Icons.send_rounded, color: colorScheme.primary),
+                      icon: Icon(
+                        Icons.send_rounded,
+                        color: colorScheme.primary,
+                      ),
                       onPressed: _submitComment,
                     ),
                   ],

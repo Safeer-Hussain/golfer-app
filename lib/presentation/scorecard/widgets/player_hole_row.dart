@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/utils/handicap_calculator.dart';
 import '../../../data/models/hole_score_model.dart';
 import '../../../data/models/player_model.dart';
@@ -31,10 +32,10 @@ class PlayerHoleRow extends StatelessWidget {
   Color _getScoreBadgeColor(BuildContext context, int diff) {
     final colorScheme = Theme.of(context).colorScheme;
     if (diff <= -2) return colorScheme.secondary; // Eagle
-    if (diff == -1) return colorScheme.primary;   // Birdie
+    if (diff == -1) return colorScheme.primary; // Birdie
     if (diff == 0) return colorScheme.surfaceContainerHighest; // Par
-    if (diff == 1) return colorScheme.secondary;  // Bogey
-    return colorScheme.error;                     // Double bogey+
+    if (diff == 1) return colorScheme.secondary; // Bogey
+    return colorScheme.error; // Double bogey+
   }
 
   Widget _buildScoreSymbol(BuildContext context, int strokes, int par) {
@@ -262,7 +263,10 @@ class PlayerHoleRow extends StatelessWidget {
                   children: [
                     Text(
                       'FIR: ',
-                      style: TextStyle(fontSize: 10, color: colorScheme.onSurfaceVariant),
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                     ),
                     ...['left', 'center', 'right', 'miss'].map((direction) {
                       final isSelected = score.fir == direction;
@@ -284,12 +288,16 @@ class PlayerHoleRow extends StatelessWidget {
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: isSelected ? colorScheme.primary : colorScheme.surfaceContainerHighest,
+                            color: isSelected
+                                ? colorScheme.primary
+                                : colorScheme.surfaceContainerHighest,
                           ),
                           child: Icon(
                             ic,
                             size: 11,
-                            color: isSelected ? colorScheme.onPrimary : colorScheme.onSurfaceVariant,
+                            color: isSelected
+                                ? colorScheme.onPrimary
+                                : colorScheme.onSurfaceVariant,
                           ),
                         ),
                       );
@@ -299,7 +307,10 @@ class PlayerHoleRow extends StatelessWidget {
               ] else ...[
                 Text(
                   'Par 3 (No FIR)',
-                  style: TextStyle(fontSize: 10, color: colorScheme.onSurfaceVariant),
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                 ),
               ],
               // Quick toggles: GIR, Sand, Pen

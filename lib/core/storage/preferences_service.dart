@@ -1,5 +1,7 @@
 import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../constants/app_constants.dart';
 import '../../data/models/flight_model.dart';
 import '../../data/models/round_scorecard_model.dart';
@@ -40,7 +42,10 @@ class PreferencesService {
   }
 
   Future<bool> saveActiveFlight(FlightModel flight) {
-    return _prefs.setString(AppConstants.keyActiveFlight, jsonEncode(flight.toJson()));
+    return _prefs.setString(
+      AppConstants.keyActiveFlight,
+      jsonEncode(flight.toJson()),
+    );
   }
 
   Future<bool> clearActiveFlight() {
@@ -60,7 +65,10 @@ class PreferencesService {
   }
 
   Future<bool> saveActiveScorecard(RoundScorecardModel scorecard) {
-    return _prefs.setString(AppConstants.keyActiveRoundScorecard, jsonEncode(scorecard.toJson()));
+    return _prefs.setString(
+      AppConstants.keyActiveRoundScorecard,
+      jsonEncode(scorecard.toJson()),
+    );
   }
 
   Future<bool> clearActiveScorecard() {

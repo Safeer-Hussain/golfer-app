@@ -1,16 +1,11 @@
-enum NassauSegment {
-  front9,
-  back9,
-  overall,
-  press,
-}
+enum NassauSegment { front9, back9, overall, press }
 
 class NassauSubMatch {
   final String id;
   final String label;
   final NassauSegment segment;
   final int startHole; // 1-based (e.g. 1, 10, 6)
-  final int endHole;   // 1-based (e.g. 9, 18)
+  final int endHole; // 1-based (e.g. 9, 18)
   final String player1Id;
   final String player2Id;
   final double stake;
@@ -140,5 +135,10 @@ class NassauMatchResult {
     required this.netPlayer1Winnings,
   });
 
-  List<NassauSubMatch> get allSubMatches => [front9, back9, overall, ...presses];
+  List<NassauSubMatch> get allSubMatches => [
+    front9,
+    back9,
+    overall,
+    ...presses,
+  ];
 }

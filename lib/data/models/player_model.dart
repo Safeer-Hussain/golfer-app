@@ -54,7 +54,8 @@ class PlayerModel {
       id: json['id'] as String,
       name: json['name'] as String,
       handicapIndex: (json['handicapIndex'] as num).toDouble(),
-      avatarAsset: json['avatarAsset'] as String? ?? 'assets/images/avatar_safeer.png',
+      avatarAsset:
+          json['avatarAsset'] as String? ?? 'assets/images/avatar_safeer.png',
       teeBox: json['teeBox'] as String? ?? 'Championship Black',
       courseHandicap: (json['courseHandicap'] as num?)?.toInt() ?? 0,
       isCurrentDeviceUser: json['isCurrentDeviceUser'] as bool? ?? false,

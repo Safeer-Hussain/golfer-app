@@ -62,12 +62,24 @@ void main() {
       final flightRepo = FlightRepository(prefsService);
       final controller = FlightSetupController(flightRepo);
 
-      controller.addCustomPlayer(name: 'Player 3', handicap: 10, teeBox: AppConstants.teeBlack);
-      controller.addCustomPlayer(name: 'Player 4', handicap: 15, teeBox: AppConstants.teeBlack);
+      controller.addCustomPlayer(
+        name: 'Player 3',
+        handicap: 10,
+        teeBox: AppConstants.teeBlack,
+      );
+      controller.addCustomPlayer(
+        name: 'Player 4',
+        handicap: 15,
+        teeBox: AppConstants.teeBlack,
+      );
       expect(controller.flightPlayers.length, 4);
       expect(controller.canAddMorePlayers, isFalse);
 
-      final excess = controller.addCustomPlayer(name: 'Player 5', handicap: 20, teeBox: AppConstants.teeBlack);
+      final excess = controller.addCustomPlayer(
+        name: 'Player 5',
+        handicap: 20,
+        teeBox: AppConstants.teeBlack,
+      );
       expect(excess, isFalse);
       expect(controller.flightPlayers.length, 4);
     });
@@ -81,17 +93,40 @@ void main() {
         defaultTeeBox: AppConstants.teeBlack,
         gameFormat: AppConstants.formatStrokePlay,
         players: [
-          const PlayerModel(id: 'p1', name: 'Safeer', handicapIndex: 4.2, avatarAsset: 'assets/images/avatar_safeer.png', teeBox: AppConstants.teeBlack, courseHandicap: 5, isCurrentDeviceUser: true),
-          const PlayerModel(id: 'p2', name: 'MK', handicapIndex: 10.0, avatarAsset: 'assets/images/avatar_player2.png', teeBox: AppConstants.teeBlack, courseHandicap: 10),
+          const PlayerModel(
+            id: 'p1',
+            name: 'Safeer',
+            handicapIndex: 4.2,
+            avatarAsset: 'assets/images/avatar_safeer.png',
+            teeBox: AppConstants.teeBlack,
+            courseHandicap: 5,
+            isCurrentDeviceUser: true,
+          ),
+          const PlayerModel(
+            id: 'p2',
+            name: 'MK',
+            handicapIndex: 10.0,
+            avatarAsset: 'assets/images/avatar_player2.png',
+            teeBox: AppConstants.teeBlack,
+            courseHandicap: 10,
+          ),
         ],
         startedAt: DateTime.now(),
       );
 
-      final scorecardRepo = ScorecardRepository(prefsService, DatabaseHelper.instance);
+      final scorecardRepo = ScorecardRepository(
+        prefsService,
+        DatabaseHelper.instance,
+      );
       final calcUseCase = CalculateScoreUseCase();
       final clubhouseRepo = ClubhouseRepository(DatabaseHelper.instance);
 
-      final controller = ScorecardController(scorecardRepo, prefsService, calcUseCase, clubhouseRepo);
+      final controller = ScorecardController(
+        scorecardRepo,
+        prefsService,
+        calcUseCase,
+        clubhouseRepo,
+      );
       controller.initializeWithFlight(flight);
 
       // Hole 1: Par 4
@@ -114,8 +149,16 @@ void main() {
 
     test('supports hole navigation within bounds (0 to 17)', () {
       final flightRepo = FlightRepository(prefsService);
-      final scorecardRepo = ScorecardRepository(prefsService, DatabaseHelper.instance);
-      final controller = ScorecardController(scorecardRepo, prefsService, CalculateScoreUseCase(), ClubhouseRepository(DatabaseHelper.instance));
+      final scorecardRepo = ScorecardRepository(
+        prefsService,
+        DatabaseHelper.instance,
+      );
+      final controller = ScorecardController(
+        scorecardRepo,
+        prefsService,
+        CalculateScoreUseCase(),
+        ClubhouseRepository(DatabaseHelper.instance),
+      );
       controller.initializeWithFlight(flightRepo.getOrCreateActiveFlight());
 
       expect(controller.currentHoleIndex, 0);

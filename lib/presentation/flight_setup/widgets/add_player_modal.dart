@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/constants/app_constants.dart';
 import '../../../core/utils/app_feedback.dart';
 
@@ -7,12 +8,10 @@ class AddPlayerModal extends StatefulWidget {
     required String name,
     required double handicap,
     required String teeBox,
-  }) onAddPlayer;
+  })
+  onAddPlayer;
 
-  const AddPlayerModal({
-    super.key,
-    required this.onAddPlayer,
-  });
+  const AddPlayerModal({super.key, required this.onAddPlayer});
 
   @override
   State<AddPlayerModal> createState() => _AddPlayerModalState();
@@ -36,11 +35,7 @@ class _AddPlayerModalState extends State<AddPlayerModal> {
       final name = _nameController.text.trim();
       final hcp = double.parse(_handicapController.text.trim());
 
-      widget.onAddPlayer(
-        name: name,
-        handicap: hcp,
-        teeBox: _selectedTee,
-      );
+      widget.onAddPlayer(name: name, handicap: hcp, teeBox: _selectedTee);
 
       Navigator.of(context).pop();
       AppFeedback.showSuccess(context, '$name added to active flight.');
@@ -76,7 +71,10 @@ class _AddPlayerModalState extends State<AddPlayerModal> {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.close_rounded, color: colorScheme.onSurfaceVariant),
+                      icon: Icon(
+                        Icons.close_rounded,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                   ],
@@ -88,7 +86,9 @@ class _AddPlayerModalState extends State<AddPlayerModal> {
                     labelText: 'Player Name',
                     hintText: 'e.g. Tariq Mehmood',
                     prefixIcon: const Icon(Icons.person_outline_rounded),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
@@ -100,12 +100,16 @@ class _AddPlayerModalState extends State<AddPlayerModal> {
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _handicapController,
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                  ),
                   decoration: InputDecoration(
                     labelText: 'Handicap Index',
                     hintText: '0.0 to 54.0',
                     prefixIcon: const Icon(Icons.trending_up_rounded),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
@@ -124,13 +128,27 @@ class _AddPlayerModalState extends State<AddPlayerModal> {
                   decoration: InputDecoration(
                     labelText: 'Assigned Tee Box',
                     prefixIcon: const Icon(Icons.flag_outlined),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                   items: const [
-                    DropdownMenuItem(value: AppConstants.teeBlack, child: Text(AppConstants.teeBlack)),
-                    DropdownMenuItem(value: AppConstants.teeBlue, child: Text(AppConstants.teeBlue)),
-                    DropdownMenuItem(value: AppConstants.teeWhite, child: Text(AppConstants.teeWhite)),
-                    DropdownMenuItem(value: AppConstants.teeRed, child: Text(AppConstants.teeRed)),
+                    DropdownMenuItem(
+                      value: AppConstants.teeBlack,
+                      child: Text(AppConstants.teeBlack),
+                    ),
+                    DropdownMenuItem(
+                      value: AppConstants.teeBlue,
+                      child: Text(AppConstants.teeBlue),
+                    ),
+                    DropdownMenuItem(
+                      value: AppConstants.teeWhite,
+                      child: Text(AppConstants.teeWhite),
+                    ),
+                    DropdownMenuItem(
+                      value: AppConstants.teeRed,
+                      child: Text(AppConstants.teeRed),
+                    ),
                   ],
                   onChanged: (val) {
                     if (val != null) {
@@ -145,9 +163,14 @@ class _AddPlayerModalState extends State<AddPlayerModal> {
                     backgroundColor: colorScheme.primary,
                     foregroundColor: colorScheme.onPrimary,
                     padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
-                  child: const Text('Add to Flight', style: TextStyle(fontWeight: FontWeight.bold)),
+                  child: const Text(
+                    'Add to Flight',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),

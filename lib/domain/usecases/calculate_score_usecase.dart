@@ -61,8 +61,12 @@ class CalculateScoreUseCase {
       }
     }
 
-    final firPct = firOpportunities > 0 ? ((firHits / firOpportunities) * 100).round() : 0;
-    final girPct = scores.isNotEmpty ? ((girHits / scores.length) * 100).round() : 0;
+    final firPct = firOpportunities > 0
+        ? ((firHits / firOpportunities) * 100).round()
+        : 0;
+    final girPct = scores.isNotEmpty
+        ? ((girHits / scores.length) * 100).round()
+        : 0;
 
     return {
       'grossTotal': grossTotal,

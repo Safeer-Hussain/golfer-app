@@ -16,15 +16,16 @@ void main() {
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
 
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
-      const MethodChannel('dev.fluttercommunity.plus/connectivity'),
-      (MethodCall methodCall) async {
-        if (methodCall.method == 'check') {
-          return ['wifi'];
-        }
-        return null;
-      },
-    );
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
+          const MethodChannel('dev.fluttercommunity.plus/connectivity'),
+          (MethodCall methodCall) async {
+            if (methodCall.method == 'check') {
+              return ['wifi'];
+            }
+            return null;
+          },
+        );
   });
 
   setUp(() async {
@@ -39,11 +40,7 @@ void main() {
       addTearDown(tester.view.resetPhysicalSize);
       addTearDown(tester.view.resetDevicePixelRatio);
 
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: GreenReadingView(),
-        ),
-      );
+      await tester.pumpWidget(const MaterialApp(home: GreenReadingView()));
       await tester.pumpAndSettle();
 
       expect(tester.takeException(), isNull);
@@ -53,17 +50,15 @@ void main() {
       expect(find.text('Green Reading & Stimpmeter'), findsOneWidget);
     });
 
-    testWidgets('renders without overflow in 800x360 landscape viewport', (tester) async {
+    testWidgets('renders without overflow in 800x360 landscape viewport', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(800, 360);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(tester.view.resetPhysicalSize);
       addTearDown(tester.view.resetDevicePixelRatio);
 
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: GreenReadingView(),
-        ),
-      );
+      await tester.pumpWidget(const MaterialApp(home: GreenReadingView()));
       await tester.pumpAndSettle();
 
       expect(tester.takeException(), isNull);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../../../core/utils/app_feedback.dart';
 import '../../../data/models/social_post_model.dart';
 import '../clubhouse_controller.dart';
@@ -8,10 +9,7 @@ import 'comments_modal.dart';
 class ClubhouseFeedTab extends StatelessWidget {
   final ClubhouseController controller;
 
-  const ClubhouseFeedTab({
-    super.key,
-    required this.controller,
-  });
+  const ClubhouseFeedTab({super.key, required this.controller});
 
   void _openComments(BuildContext context, SocialPostModel post) {
     showModalBottomSheet<void>(
@@ -23,7 +21,8 @@ class ClubhouseFeedTab extends StatelessWidget {
   }
 
   void _sharePost(BuildContext context, SocialPostModel post) async {
-    final text = 'Golfer Clubhouse Share:\n${post.authorName} at ${post.courseName}\nScore: ${post.scoreGross != null ? "${post.scoreGross} (${post.diffVsPar})" : "Milestone"}\n"${post.textContent}"';
+    final text =
+        'Golfer Clubhouse Share:\n${post.authorName} at ${post.courseName}\nScore: ${post.scoreGross != null ? "${post.scoreGross} (${post.diffVsPar})" : "Milestone"}\n"${post.textContent}"';
     await Clipboard.setData(ClipboardData(text: text));
     if (context.mounted) {
       AppFeedback.showSuccess(context, 'Milestone post copied to clipboard.');
@@ -36,7 +35,10 @@ class ClubhouseFeedTab extends StatelessWidget {
 
     if (controller.isLoading) {
       return Center(
-        child: CircularProgressIndicator(strokeWidth: 2.5, color: colorScheme.primary),
+        child: CircularProgressIndicator(
+          strokeWidth: 2.5,
+          color: colorScheme.primary,
+        ),
       );
     }
 
@@ -103,7 +105,10 @@ class ClubhouseFeedTab extends StatelessWidget {
                   ),
                   if (post.scoreGross != null) ...[
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: colorScheme.primary.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(8),
@@ -136,26 +141,38 @@ class ClubhouseFeedTab extends StatelessWidget {
                     if (post.firPct != null)
                       Container(
                         margin: const EdgeInsets.only(right: 6),
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: colorScheme.surfaceContainerHighest,
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
                           'FIR ${post.firPct}%',
-                          style: TextStyle(fontSize: 10, color: colorScheme.onSurfaceVariant),
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: colorScheme.onSurfaceVariant,
+                          ),
                         ),
                       ),
                     if (post.girPct != null)
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: colorScheme.surfaceContainerHighest,
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
                           'GIR ${post.girPct}%',
-                          style: TextStyle(fontSize: 10, color: colorScheme.onSurfaceVariant),
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: colorScheme.onSurfaceVariant,
+                          ),
                         ),
                       ),
                   ],
@@ -170,8 +187,12 @@ class ClubhouseFeedTab extends StatelessWidget {
                     children: [
                       IconButton(
                         icon: Icon(
-                          post.isLikedByMe ? Icons.favorite_rounded : Icons.favorite_border_rounded,
-                          color: post.isLikedByMe ? colorScheme.error : colorScheme.onSurfaceVariant,
+                          post.isLikedByMe
+                              ? Icons.favorite_rounded
+                              : Icons.favorite_border_rounded,
+                          color: post.isLikedByMe
+                              ? colorScheme.error
+                              : colorScheme.onSurfaceVariant,
                           size: 20,
                         ),
                         padding: EdgeInsets.zero,
@@ -181,7 +202,10 @@ class ClubhouseFeedTab extends StatelessWidget {
                       const SizedBox(width: 4),
                       Text(
                         '${post.likesCount}',
-                        style: TextStyle(fontSize: 12, color: colorScheme.onSurfaceVariant),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
                       ),
                       const SizedBox(width: 16),
                       IconButton(
@@ -197,7 +221,10 @@ class ClubhouseFeedTab extends StatelessWidget {
                       const SizedBox(width: 4),
                       Text(
                         '${post.commentsCount}',
-                        style: TextStyle(fontSize: 12, color: colorScheme.onSurfaceVariant),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
                       ),
                     ],
                   ),

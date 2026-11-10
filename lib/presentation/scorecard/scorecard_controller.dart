@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../../core/constants/golf_courses.dart';
 import '../../core/storage/preferences_service.dart';
 import '../../core/utils/handicap_calculator.dart';
@@ -111,14 +112,18 @@ class ScorecardController extends ChangeNotifier {
       _activeScorecard.playerScores[playerId] ?? [],
     );
 
-    final idx = currentList.indexWhere((h) => h.holeNumber == updatedHoleScore.holeNumber);
+    final idx = currentList.indexWhere(
+      (h) => h.holeNumber == updatedHoleScore.holeNumber,
+    );
     if (idx != -1) {
       currentList[idx] = updatedHoleScore;
     } else {
       currentList.add(updatedHoleScore);
     }
 
-    final newScoresMap = Map<String, List<HoleScoreModel>>.from(_activeScorecard.playerScores);
+    final newScoresMap = Map<String, List<HoleScoreModel>>.from(
+      _activeScorecard.playerScores,
+    );
     newScoresMap[playerId] = currentList;
 
     _activeScorecard = _activeScorecard.copyWith(playerScores: newScoresMap);
@@ -128,7 +133,10 @@ class ScorecardController extends ChangeNotifier {
 
   Map<String, dynamic> getPlayerAnalytics(String playerId) {
     final scores = _activeScorecard.playerScores[playerId] ?? [];
-    final player = _players.firstWhere((p) => p.id == playerId, orElse: () => _players.first);
+    final player = _players.firstWhere(
+      (p) => p.id == playerId,
+      orElse: () => _players.first,
+    );
     return _calculateScoreUseCase.computeRoundAnalytics(
       scores: scores,
       course: _course,
@@ -159,7 +167,10 @@ class ScorecardController extends ChangeNotifier {
       (p) => p.isCurrentDeviceUser,
       orElse: () => _players.first,
     );
-    await _scorecardRepository.completeAndArchiveRound(_activeScorecard, userPlayer.id);
+    await _scorecardRepository.completeAndArchiveRound(
+      _activeScorecard,
+      userPlayer.id,
+    );
     notifyListeners();
   }
 
@@ -190,7 +201,9 @@ class ScorecardController extends ChangeNotifier {
     final sb = StringBuffer();
     sb.writeln('========================================');
     sb.writeln('GOLFER DIGITAL SCORECARD - ${_course.name}');
-    sb.writeln('Date: ${_activeScorecard.playedAt.toString().substring(0, 10)} | Tee: ${_activeScorecard.teeBox}');
+    sb.writeln(
+      'Date: ${_activeScorecard.playedAt.toString().substring(0, 10)} | Tee: ${_activeScorecard.teeBox}',
+    );
     sb.writeln('========================================');
     sb.writeln('Hole | Par | Gross | Net | Pts');
     sb.writeln('----------------------------------------');
@@ -214,13 +227,19 @@ class ScorecardController extends ChangeNotifier {
         holeStrokeIndex: hole.strokeIndex,
         courseHandicap: userPlayer.courseHandicap,
       );
-      sb.writeln('${s.holeNumber.toString().padLeft(4)} | ${hole.par.toString().padLeft(3)} | ${s.strokes.toString().padLeft(5)} | ${net.toString().padLeft(3)} | ${pts.toString().padLeft(3)}');
+      sb.writeln(
+        '${s.holeNumber.toString().padLeft(4)} | ${hole.par.toString().padLeft(3)} | ${s.strokes.toString().padLeft(5)} | ${net.toString().padLeft(3)} | ${pts.toString().padLeft(3)}',
+      );
     }
 
     final analytics = getPlayerAnalytics(userPlayer.id);
     sb.writeln('========================================');
-    sb.writeln('TOTAL: Gross ${analytics['grossTotal']} (${analytics['diffVsPar']}) | Net ${analytics['netTotal']} | Stableford ${analytics['stablefordTotal']} pts');
-    sb.writeln('FIR: ${analytics['firPct']}% | GIR: ${analytics['girPct']}% | Putts: ${analytics['totalPutts']}');
+    sb.writeln(
+      'TOTAL: Gross ${analytics['grossTotal']} (${analytics['diffVsPar']}) | Net ${analytics['netTotal']} | Stableford ${analytics['stablefordTotal']} pts',
+    );
+    sb.writeln(
+      'FIR: ${analytics['firPct']}% | GIR: ${analytics['girPct']}% | Putts: ${analytics['totalPutts']}',
+    );
     sb.writeln('========================================');
 
     await Clipboard.setData(ClipboardData(text: sb.toString()));

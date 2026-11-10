@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../core/di/service_locator.dart';
 import 'clubhouse_controller.dart';
 import 'widgets/club_bag_calibrator_tab.dart';
@@ -13,7 +14,8 @@ class ClubhouseAnalyticsView extends StatefulWidget {
   State<ClubhouseAnalyticsView> createState() => _ClubhouseAnalyticsViewState();
 }
 
-class _ClubhouseAnalyticsViewState extends State<ClubhouseAnalyticsView> with SingleTickerProviderStateMixin {
+class _ClubhouseAnalyticsViewState extends State<ClubhouseAnalyticsView>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -31,7 +33,10 @@ class _ClubhouseAnalyticsViewState extends State<ClubhouseAnalyticsView> with Si
     super.dispose();
   }
 
-  void _openPostMilestoneModal(BuildContext context, ClubhouseController controller) {
+  void _openPostMilestoneModal(
+    BuildContext context,
+    ClubhouseController controller,
+  ) {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
@@ -44,7 +49,8 @@ class _ClubhouseAnalyticsViewState extends State<ClubhouseAnalyticsView> with Si
   Widget build(BuildContext context) {
     final controller = sl<ClubhouseController>();
     final colorScheme = Theme.of(context).colorScheme;
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return ListenableBuilder(
       listenable: controller,
@@ -59,8 +65,14 @@ class _ClubhouseAnalyticsViewState extends State<ClubhouseAnalyticsView> with Si
                 indicatorColor: colorScheme.primary,
                 labelColor: colorScheme.primary,
                 unselectedLabelColor: colorScheme.onSurfaceVariant,
-                labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-                unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
+                labelStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                ),
+                unselectedLabelStyle: const TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 12,
+                ),
                 tabs: const [
                   Tab(text: 'Analytics'),
                   Tab(text: '14-Club Bag'),
@@ -73,7 +85,10 @@ class _ClubhouseAnalyticsViewState extends State<ClubhouseAnalyticsView> with Si
               ? Row(
                   children: [
                     const Expanded(flex: 3, child: HandicapAnalyticsTab()),
-                    VerticalDivider(width: 1, color: colorScheme.outlineVariant),
+                    VerticalDivider(
+                      width: 1,
+                      color: colorScheme.outlineVariant,
+                    ),
                     Expanded(
                       flex: 4,
                       child: _tabController.index == 1

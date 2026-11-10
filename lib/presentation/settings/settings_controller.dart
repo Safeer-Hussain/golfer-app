@@ -1,6 +1,8 @@
 import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+
 import '../../core/network/network_service.dart';
 import '../../core/storage/preferences_service.dart';
 
@@ -37,7 +39,10 @@ class SettingsController extends ChangeNotifier {
 
   void _initConnectivity() {
     try {
-      _connectivity.checkConnectivity().then(_updateConnectionStatus).catchError((Object _) {});
+      _connectivity
+          .checkConnectivity()
+          .then(_updateConnectionStatus)
+          .catchError((Object _) {});
       _connectivitySubscription = _connectivity.onConnectivityChanged.listen(
         _updateConnectionStatus,
         onError: (Object _) {},
@@ -46,7 +51,8 @@ class SettingsController extends ChangeNotifier {
   }
 
   void _updateConnectionStatus(List<ConnectivityResult> results) {
-    final offline = results.isEmpty || results.contains(ConnectivityResult.none);
+    final offline =
+        results.isEmpty || results.contains(ConnectivityResult.none);
     if (_isOffline != offline) {
       _isOffline = offline;
       notifyListeners();
@@ -77,7 +83,8 @@ class SettingsController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      _liveTournamentData = await _networkService.fetchLiveTournamentLeaderboard();
+      _liveTournamentData = await _networkService
+          .fetchLiveTournamentLeaderboard();
     } catch (e) {
       _tournamentError = e.toString();
       _liveTournamentData = null;

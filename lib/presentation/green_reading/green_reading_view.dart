@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+
 import 'green_reading_controller.dart';
 import 'widgets/bubble_level_indicator.dart';
 import 'widgets/putt_trajectory_card.dart';
@@ -35,7 +36,8 @@ class _GreenReadingViewState extends State<GreenReadingView> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
@@ -72,13 +74,17 @@ class _GreenReadingViewState extends State<GreenReadingView> {
                   flex: 5,
                   child: SingleChildScrollView(
                     controller: _landscapeLeftController,
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         BubbleLevelIndicator(
                           slopeDegrees: reading.slopeDegrees,
-                          fallLineHeadingDegrees: reading.fallLineHeadingDegrees,
+                          fallLineHeadingDegrees:
+                              reading.fallLineHeadingDegrees,
                         ),
                         const SizedBox(height: 12),
                         _buildSlopeControls(context, reading),
@@ -94,7 +100,10 @@ class _GreenReadingViewState extends State<GreenReadingView> {
                   flex: 6,
                   child: SingleChildScrollView(
                     controller: _landscapeRightController,
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -159,7 +168,12 @@ class _GreenReadingViewState extends State<GreenReadingView> {
     final presets = [
       {'label': 'Flat (0.5°)', 'slope': 0.5, 'fall': 90.0, 'stimp': 10.0},
       {'label': 'Moderate (1.5°)', 'slope': 1.5, 'fall': 90.0, 'stimp': 10.5},
-      {'label': 'Championship (2.5°)', 'slope': 2.5, 'fall': 120.0, 'stimp': 11.5},
+      {
+        'label': 'Championship (2.5°)',
+        'slope': 2.5,
+        'fall': 120.0,
+        'stimp': 11.5,
+      },
       {'label': 'False Front (4.0°)', 'slope': 4.0, 'fall': 0.0, 'stimp': 12.0},
     ];
 
@@ -168,7 +182,8 @@ class _GreenReadingViewState extends State<GreenReadingView> {
       child: Row(
         children: presets.map((preset) {
           final slope = preset['slope'] as double;
-          final isSelected = (_controller.reading.slopeDegrees - slope).abs() < 0.2;
+          final isSelected =
+              (_controller.reading.slopeDegrees - slope).abs() < 0.2;
 
           return Padding(
             padding: const EdgeInsets.only(right: 8),
@@ -188,7 +203,9 @@ class _GreenReadingViewState extends State<GreenReadingView> {
               labelStyle: TextStyle(
                 fontSize: 12,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                color: isSelected ? colorScheme.onPrimaryContainer : colorScheme.onSurface,
+                color: isSelected
+                    ? colorScheme.onPrimaryContainer
+                    : colorScheme.onSurface,
               ),
             ),
           );
@@ -379,17 +396,26 @@ class _GreenReadingViewState extends State<GreenReadingView> {
                 onTap: () => _controller.setPuttDistance(dist),
                 borderRadius: BorderRadius.circular(6),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
-                    color: isSelected ? colorScheme.primary : colorScheme.surfaceContainerHighest,
+                    color: isSelected
+                        ? colorScheme.primary
+                        : colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
                     '${dist.toInt()}ft',
                     style: TextStyle(
                       fontSize: 11,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                      color: isSelected ? colorScheme.onPrimary : colorScheme.onSurfaceVariant,
+                      fontWeight: isSelected
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                      color: isSelected
+                          ? colorScheme.onPrimary
+                          : colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),

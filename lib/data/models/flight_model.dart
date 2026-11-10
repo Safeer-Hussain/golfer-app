@@ -52,8 +52,10 @@ class FlightModel {
       courseId: json['courseId'] as String? ?? 'lahore_garrison',
       courseName: json['courseName'] as String? ?? 'Lahore Garrison Golf & CC',
       defaultTeeBox: json['defaultTeeBox'] as String? ?? AppConstants.teeBlack,
-      gameFormat: json['gameFormat'] as String? ?? AppConstants.formatStrokePlay,
-      players: (json['players'] as List<dynamic>?)
+      gameFormat:
+          json['gameFormat'] as String? ?? AppConstants.formatStrokePlay,
+      players:
+          (json['players'] as List<dynamic>?)
               ?.map((p) => PlayerModel.fromJson(p as Map<String, dynamic>))
               .toList() ??
           [],

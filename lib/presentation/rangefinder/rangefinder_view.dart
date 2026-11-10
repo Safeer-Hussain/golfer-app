@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+
 import '../../core/di/service_locator.dart';
 import '../../core/utils/app_feedback.dart';
 import '../scorecard/scorecard_controller.dart';
@@ -18,15 +19,17 @@ class RangefinderView extends StatefulWidget {
 class _RangefinderViewState extends State<RangefinderView> {
   final MapController _mapController = MapController();
 
-  void _openShotTrackerModal(BuildContext context, RangefinderController controller, int distance) {
+  void _openShotTrackerModal(
+    BuildContext context,
+    RangefinderController controller,
+    int distance,
+  ) {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
       backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
-      builder: (ctx) => ShotTrackerModal(
-        measuredDistance: distance,
-        controller: controller,
-      ),
+      builder: (ctx) =>
+          ShotTrackerModal(measuredDistance: distance, controller: controller),
     );
   }
 
@@ -46,10 +49,17 @@ class _RangefinderViewState extends State<RangefinderView> {
             shape: BoxShape.circle,
             border: Border.all(color: colorScheme.onSurface, width: 2),
             boxShadow: [
-              BoxShadow(color: colorScheme.surface.withValues(alpha: 0.5), blurRadius: 6),
+              BoxShadow(
+                color: colorScheme.surface.withValues(alpha: 0.5),
+                blurRadius: 6,
+              ),
             ],
           ),
-          child: Icon(Icons.golf_course_rounded, color: colorScheme.onSurface, size: 20),
+          child: Icon(
+            Icons.golf_course_rounded,
+            color: colorScheme.onSurface,
+            size: 20,
+          ),
         ),
       ),
       // Target Crosshair Marker
@@ -91,10 +101,17 @@ class _RangefinderViewState extends State<RangefinderView> {
             shape: BoxShape.circle,
             border: Border.all(color: colorScheme.onSecondary, width: 2),
             boxShadow: [
-              BoxShadow(color: colorScheme.secondary.withValues(alpha: 0.4), blurRadius: 6),
+              BoxShadow(
+                color: colorScheme.secondary.withValues(alpha: 0.4),
+                blurRadius: 6,
+              ),
             ],
           ),
-          child: Icon(Icons.flag_rounded, color: colorScheme.onSecondary, size: 20),
+          child: Icon(
+            Icons.flag_rounded,
+            color: colorScheme.onSecondary,
+            size: 20,
+          ),
         ),
       ),
     ];
@@ -147,7 +164,10 @@ class _RangefinderViewState extends State<RangefinderView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: colorScheme.surfaceContainer.withValues(alpha: 0.92),
                   borderRadius: BorderRadius.circular(10),
@@ -181,11 +201,17 @@ class _RangefinderViewState extends State<RangefinderView> {
               decoration: BoxDecoration(
                 color: colorScheme.secondary,
                 borderRadius: BorderRadius.circular(10),
-                boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 8)],
+                boxShadow: const [
+                  BoxShadow(color: Colors.black26, blurRadius: 8),
+                ],
               ),
               child: Row(
                 children: [
-                  Icon(Icons.gps_fixed_rounded, color: colorScheme.onSecondary, size: 20),
+                  Icon(
+                    Icons.gps_fixed_rounded,
+                    color: colorScheme.onSecondary,
+                    size: 20,
+                  ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -198,7 +224,11 @@ class _RangefinderViewState extends State<RangefinderView> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.close, color: colorScheme.onSecondary, size: 18),
+                    icon: Icon(
+                      Icons.close,
+                      color: colorScheme.onSecondary,
+                      size: 18,
+                    ),
                     onPressed: () => controller.cancelShotTracking(),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
@@ -226,7 +256,10 @@ class _RangefinderViewState extends State<RangefinderView> {
     );
   }
 
-  Widget _buildLandscapeSideDetail(BuildContext context, RangefinderController controller) {
+  Widget _buildLandscapeSideDetail(
+    BuildContext context,
+    RangefinderController controller,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
     final hole = controller.currentHole;
 
@@ -272,7 +305,11 @@ class _RangefinderViewState extends State<RangefinderView> {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.warning_amber_rounded, size: 16, color: colorScheme.secondary),
+                    Icon(
+                      Icons.warning_amber_rounded,
+                      size: 16,
+                      color: colorScheme.secondary,
+                    ),
                     const SizedBox(width: 6),
                     Text(
                       'Hazard & Course Vectors',
@@ -287,7 +324,10 @@ class _RangefinderViewState extends State<RangefinderView> {
                 const SizedBox(height: 6),
                 Text(
                   hole.hazardsDescription,
-                  style: TextStyle(fontSize: 11, color: colorScheme.onSurfaceVariant),
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                 ),
               ],
             ),
@@ -296,7 +336,10 @@ class _RangefinderViewState extends State<RangefinderView> {
           ElevatedButton.icon(
             onPressed: () {
               controller.startShotTracking(null);
-              AppFeedback.showInfo(context, 'Shot tracking started from tee box. Tap map landing spot.');
+              AppFeedback.showInfo(
+                context,
+                'Shot tracking started from tee box. Tap map landing spot.',
+              );
             },
             icon: const Icon(Icons.gps_fixed_rounded, size: 18),
             label: const Text('Track Live Shot'),
@@ -315,7 +358,8 @@ class _RangefinderViewState extends State<RangefinderView> {
   Widget build(BuildContext context) {
     final controller = sl<RangefinderController>();
     final scorecardController = sl<ScorecardController>();
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     // Sync hole with scorecard
     controller.syncWithHole(
@@ -332,8 +376,14 @@ class _RangefinderViewState extends State<RangefinderView> {
               ? Row(
                   children: [
                     Expanded(flex: 3, child: _buildMap(context, controller)),
-                    VerticalDivider(width: 1, color: Theme.of(context).colorScheme.outlineVariant),
-                    Expanded(flex: 2, child: _buildLandscapeSideDetail(context, controller)),
+                    VerticalDivider(
+                      width: 1,
+                      color: Theme.of(context).colorScheme.outlineVariant,
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: _buildLandscapeSideDetail(context, controller),
+                    ),
                   ],
                 )
               : _buildMap(context, controller),
@@ -343,7 +393,10 @@ class _RangefinderViewState extends State<RangefinderView> {
                   heroTag: 'fab_gps_shot_track',
                   onPressed: () {
                     controller.startShotTracking(null);
-                    AppFeedback.showInfo(context, 'Shot tracking started from tee box. Tap map landing spot.');
+                    AppFeedback.showInfo(
+                      context,
+                      'Shot tracking started from tee box. Tap map landing spot.',
+                    );
                   },
                   icon: const Icon(Icons.gps_fixed_rounded),
                   label: const Text('Track Shot'),

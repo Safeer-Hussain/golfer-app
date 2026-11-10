@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../core/di/service_locator.dart';
 import '../green_reading/green_reading_view.dart';
 import 'scorecard_controller.dart';
@@ -13,11 +14,7 @@ class ScorecardView extends StatefulWidget {
   final VoidCallback? onOpenRangefinder;
   final VoidCallback? onOpenAiCaddie;
 
-  const ScorecardView({
-    super.key,
-    this.onOpenRangefinder,
-    this.onOpenAiCaddie,
-  });
+  const ScorecardView({super.key, this.onOpenRangefinder, this.onOpenAiCaddie});
 
   @override
   State<ScorecardView> createState() => _ScorecardViewState();
@@ -46,14 +43,15 @@ class _ScorecardViewState extends State<ScorecardView> {
   }
 
   void _openGreenReading(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => const GreenReadingView(),
-      ),
-    );
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute<void>(builder: (_) => const GreenReadingView()));
   }
 
-  Widget _buildCockpitPane(BuildContext context, ScorecardController controller) {
+  Widget _buildCockpitPane(
+    BuildContext context,
+    ScorecardController controller,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return SingleChildScrollView(
@@ -78,10 +76,15 @@ class _ScorecardViewState extends State<ScorecardView> {
                   child: OutlinedButton.icon(
                     onPressed: widget.onOpenRangefinder,
                     icon: const Icon(Icons.my_location_rounded, size: 15),
-                    label: const Text('Pin (GPS)', style: TextStyle(fontSize: 11)),
+                    label: const Text(
+                      'Pin (GPS)',
+                      style: TextStyle(fontSize: 11),
+                    ),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: colorScheme.primary,
-                      side: BorderSide(color: colorScheme.primary.withValues(alpha: 0.5)),
+                      side: BorderSide(
+                        color: colorScheme.primary.withValues(alpha: 0.5),
+                      ),
                       padding: const EdgeInsets.symmetric(vertical: 8),
                     ),
                   ),
@@ -91,10 +94,15 @@ class _ScorecardViewState extends State<ScorecardView> {
                   child: OutlinedButton.icon(
                     onPressed: () => _openGreenReading(context),
                     icon: const Icon(Icons.speed_rounded, size: 15),
-                    label: const Text('Green Reading', style: TextStyle(fontSize: 11)),
+                    label: const Text(
+                      'Green Reading',
+                      style: TextStyle(fontSize: 11),
+                    ),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: colorScheme.tertiary,
-                      side: BorderSide(color: colorScheme.tertiary.withValues(alpha: 0.5)),
+                      side: BorderSide(
+                        color: colorScheme.tertiary.withValues(alpha: 0.5),
+                      ),
                       padding: const EdgeInsets.symmetric(vertical: 8),
                     ),
                   ),
@@ -104,10 +112,15 @@ class _ScorecardViewState extends State<ScorecardView> {
                   child: OutlinedButton.icon(
                     onPressed: widget.onOpenAiCaddie,
                     icon: const Icon(Icons.smart_toy_rounded, size: 15),
-                    label: const Text('Strategy', style: TextStyle(fontSize: 11)),
+                    label: const Text(
+                      'Strategy',
+                      style: TextStyle(fontSize: 11),
+                    ),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: colorScheme.secondary,
-                      side: BorderSide(color: colorScheme.secondary.withValues(alpha: 0.5)),
+                      side: BorderSide(
+                        color: colorScheme.secondary.withValues(alpha: 0.5),
+                      ),
                       padding: const EdgeInsets.symmetric(vertical: 8),
                     ),
                   ),
@@ -159,7 +172,10 @@ class _ScorecardViewState extends State<ScorecardView> {
     );
   }
 
-  Widget _buildMatrixPane(BuildContext context, ScorecardController controller) {
+  Widget _buildMatrixPane(
+    BuildContext context,
+    ScorecardController controller,
+  ) {
     return SingleChildScrollView(
       physics: const ClampingScrollPhysics(),
       padding: const EdgeInsets.only(bottom: 76),
@@ -176,7 +192,8 @@ class _ScorecardViewState extends State<ScorecardView> {
   Widget build(BuildContext context) {
     final controller = sl<ScorecardController>();
     final colorScheme = Theme.of(context).colorScheme;
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return ListenableBuilder(
       listenable: controller,
@@ -188,7 +205,10 @@ class _ScorecardViewState extends State<ScorecardView> {
             children: [
               // View toggle bar
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 6,
+                ),
                 color: colorScheme.surface,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -196,11 +216,24 @@ class _ScorecardViewState extends State<ScorecardView> {
                     if (!isLandscape)
                       SegmentedButton<int>(
                         segments: const [
-                          ButtonSegment<int>(value: 0, label: Text('Cockpit', style: TextStyle(fontSize: 11))),
-                          ButtonSegment<int>(value: 1, label: Text('Matrix', style: TextStyle(fontSize: 11))),
+                          ButtonSegment<int>(
+                            value: 0,
+                            label: Text(
+                              'Cockpit',
+                              style: TextStyle(fontSize: 11),
+                            ),
+                          ),
+                          ButtonSegment<int>(
+                            value: 1,
+                            label: Text(
+                              'Matrix',
+                              style: TextStyle(fontSize: 11),
+                            ),
+                          ),
                         ],
                         selected: {_viewMode},
-                        onSelectionChanged: (set) => setState(() => _viewMode = set.first),
+                        onSelectionChanged: (set) =>
+                            setState(() => _viewMode = set.first),
                         style: ButtonStyle(
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           visualDensity: VisualDensity.compact,
@@ -218,24 +251,42 @@ class _ScorecardViewState extends State<ScorecardView> {
                     Row(
                       children: [
                         IconButton(
-                          icon: Icon(Icons.speed_rounded, size: 20, color: colorScheme.tertiary),
+                          icon: Icon(
+                            Icons.speed_rounded,
+                            size: 20,
+                            color: colorScheme.tertiary,
+                          ),
                           tooltip: 'Green Reading & Stimpmeter',
                           onPressed: () => _openGreenReading(context),
                         ),
                         IconButton(
-                          icon: Icon(Icons.handshake_outlined, size: 20, color: colorScheme.secondary),
+                          icon: Icon(
+                            Icons.handshake_outlined,
+                            size: 20,
+                            color: colorScheme.secondary,
+                          ),
                           tooltip: 'Nassau Side-Bets',
-                          onPressed: () => _openNassauModal(context, controller),
+                          onPressed: () =>
+                              _openNassauModal(context, controller),
                         ),
                         IconButton(
-                          icon: Icon(Icons.share_outlined, size: 20, color: colorScheme.onSurfaceVariant),
+                          icon: Icon(
+                            Icons.share_outlined,
+                            size: 20,
+                            color: colorScheme.onSurfaceVariant,
+                          ),
                           tooltip: 'Share Scorecard',
                           onPressed: () => _openShareSheet(context, controller),
                         ),
                         IconButton(
-                          icon: Icon(Icons.leaderboard_outlined, size: 20, color: colorScheme.primary),
+                          icon: Icon(
+                            Icons.leaderboard_outlined,
+                            size: 20,
+                            color: colorScheme.primary,
+                          ),
                           tooltip: 'Live Leaderboard',
-                          onPressed: () => _scaffoldKey.currentState?.openEndDrawer(),
+                          onPressed: () =>
+                              _scaffoldKey.currentState?.openEndDrawer(),
                         ),
                       ],
                     ),
@@ -247,14 +298,21 @@ class _ScorecardViewState extends State<ScorecardView> {
                 child: isLandscape
                     ? Row(
                         children: [
-                          Expanded(child: _buildCockpitPane(context, controller)),
-                          VerticalDivider(width: 1, color: colorScheme.outlineVariant),
-                          Expanded(child: _buildMatrixPane(context, controller)),
+                          Expanded(
+                            child: _buildCockpitPane(context, controller),
+                          ),
+                          VerticalDivider(
+                            width: 1,
+                            color: colorScheme.outlineVariant,
+                          ),
+                          Expanded(
+                            child: _buildMatrixPane(context, controller),
+                          ),
                         ],
                       )
                     : (_viewMode == 0
-                        ? _buildCockpitPane(context, controller)
-                        : _buildMatrixPane(context, controller)),
+                          ? _buildCockpitPane(context, controller)
+                          : _buildMatrixPane(context, controller)),
               ),
             ],
           ),
@@ -267,8 +325,16 @@ class _ScorecardViewState extends State<ScorecardView> {
                 _scaffoldKey.currentState?.openEndDrawer();
               }
             },
-            icon: Icon(controller.currentHoleIndex < 17 ? Icons.arrow_forward : Icons.done_all_rounded),
-            label: Text(controller.currentHoleIndex < 17 ? 'Hole ${controller.currentHoleIndex + 2}' : 'Verify Round'),
+            icon: Icon(
+              controller.currentHoleIndex < 17
+                  ? Icons.arrow_forward
+                  : Icons.done_all_rounded,
+            ),
+            label: Text(
+              controller.currentHoleIndex < 17
+                  ? 'Hole ${controller.currentHoleIndex + 2}'
+                  : 'Verify Round',
+            ),
             backgroundColor: colorScheme.primary,
             foregroundColor: colorScheme.onPrimary,
           ),

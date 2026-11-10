@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+
 import 'mock_network_interceptor.dart';
 import '../storage/preferences_service.dart';
 
@@ -22,7 +23,9 @@ class NetworkService {
   }
 
   Future<Map<String, dynamic>> fetchLiveTournamentLeaderboard() async {
-    final response = await dio.get<Map<String, dynamic>>('/tournament/leaderboard');
+    final response = await dio.get<Map<String, dynamic>>(
+      '/tournament/leaderboard',
+    );
     return response.data ?? {};
   }
 }

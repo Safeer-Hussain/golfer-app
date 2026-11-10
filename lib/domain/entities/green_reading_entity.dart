@@ -1,15 +1,12 @@
-enum GreenBreakDirection {
-  straight,
-  leftToRight,
-  rightToLeft,
-}
+enum GreenBreakDirection { straight, leftToRight, rightToLeft }
 
 class GreenSlopeReading {
   final double slopeDegrees;
-  final double fallLineHeadingDegrees; // 0° North, 90° East, 180° South, 270° West
-  final double stimpSpeed;             // 8.0 to 13.0
-  final double puttDistanceFeet;       // e.g. 10.0 to 50.0 ft
-  final double puttHeadingDegrees;     // Heading from ball to cup
+  final double
+  fallLineHeadingDegrees; // 0° North, 90° East, 180° South, 270° West
+  final double stimpSpeed; // 8.0 to 13.0
+  final double puttDistanceFeet; // e.g. 10.0 to 50.0 ft
+  final double puttHeadingDegrees; // Heading from ball to cup
 
   const GreenSlopeReading({
     required this.slopeDegrees,
@@ -19,7 +16,8 @@ class GreenSlopeReading {
     this.puttHeadingDegrees = 0.0,
   });
 
-  double get slopePercent => slopeDegrees * 1.7455; // tan(theta) * 100 for small angles
+  double get slopePercent =>
+      slopeDegrees * 1.7455; // tan(theta) * 100 for small angles
 
   GreenSlopeReading copyWith({
     double? slopeDegrees,
@@ -30,7 +28,8 @@ class GreenSlopeReading {
   }) {
     return GreenSlopeReading(
       slopeDegrees: slopeDegrees ?? this.slopeDegrees,
-      fallLineHeadingDegrees: fallLineHeadingDegrees ?? this.fallLineHeadingDegrees,
+      fallLineHeadingDegrees:
+          fallLineHeadingDegrees ?? this.fallLineHeadingDegrees,
       stimpSpeed: stimpSpeed ?? this.stimpSpeed,
       puttDistanceFeet: puttDistanceFeet ?? this.puttDistanceFeet,
       puttHeadingDegrees: puttHeadingDegrees ?? this.puttHeadingDegrees,

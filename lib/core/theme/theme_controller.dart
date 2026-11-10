@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../storage/preferences_service.dart';
 
 class ThemeController extends ChangeNotifier {

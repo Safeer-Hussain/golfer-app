@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 class BubbleLevelIndicator extends StatelessWidget {
@@ -36,7 +37,10 @@ class BubbleLevelIndicator extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: colorScheme.surfaceContainer,
-                  border: Border.all(color: colorScheme.outlineVariant, width: 2),
+                  border: Border.all(
+                    color: colorScheme.outlineVariant,
+                    width: 2,
+                  ),
                   boxShadow: [
                     BoxShadow(
                       color: colorScheme.surface.withValues(alpha: 0.5),
@@ -81,7 +85,10 @@ class BubbleLevelIndicator extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: colorScheme.secondary.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(4),
@@ -101,7 +108,8 @@ class BubbleLevelIndicator extends StatelessWidget {
                 builder: (context) {
                   final maxOffset = 80.0;
                   final normSlope = (slopeDegrees / 4.5).clamp(0.0, 1.0);
-                  final rad = (fallLineHeadingDegrees - 90.0) * (math.pi / 180.0);
+                  final rad =
+                      (fallLineHeadingDegrees - 90.0) * (math.pi / 180.0);
                   final offsetX = math.cos(rad) * normSlope * maxOffset;
                   final offsetY = math.sin(rad) * normSlope * maxOffset;
 
@@ -113,7 +121,10 @@ class BubbleLevelIndicator extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: colorScheme.primary.withValues(alpha: 0.35),
-                        border: Border.all(color: colorScheme.primary, width: 2.5),
+                        border: Border.all(
+                          color: colorScheme.primary,
+                          width: 2.5,
+                        ),
                         boxShadow: [
                           BoxShadow(
                             color: colorScheme.primary.withValues(alpha: 0.3),
@@ -158,7 +169,9 @@ class BubbleLevelIndicator extends StatelessWidget {
               decoration: BoxDecoration(
                 color: colorScheme.primary.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: colorScheme.primary.withValues(alpha: 0.3)),
+                border: Border.all(
+                  color: colorScheme.primary.withValues(alpha: 0.3),
+                ),
               ),
               child: Text(
                 '${slopeDegrees.toStringAsFixed(1)}° Tilt',
@@ -190,7 +203,9 @@ class BubbleLevelIndicator extends StatelessWidget {
               decoration: BoxDecoration(
                 color: colorScheme.secondary.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: colorScheme.secondary.withValues(alpha: 0.3)),
+                border: Border.all(
+                  color: colorScheme.secondary.withValues(alpha: 0.3),
+                ),
               ),
               child: Text(
                 'Fall: ${fallLineHeadingDegrees.toInt()}°',

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/utils/yardage_formatter.dart';
 
 class GpsCrosshairCard extends StatelessWidget {
@@ -72,11 +73,16 @@ class GpsCrosshairCard extends StatelessWidget {
               ),
               // Center Target to Pin (Large Hero stat)
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: colorScheme.primary.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: colorScheme.primary.withValues(alpha: 0.4)),
+                  border: Border.all(
+                    color: colorScheme.primary.withValues(alpha: 0.4),
+                  ),
                 ),
                 child: Column(
                   children: [
@@ -114,11 +120,19 @@ class GpsCrosshairCard extends StatelessWidget {
                 children: [
                   Text(
                     'B: ${YardageFormatter.formatNumber(backPinYards, unitSystem)} $unit',
-                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: colorScheme.onSurfaceVariant),
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                   ),
                   Text(
                     'F: ${YardageFormatter.formatNumber(frontPinYards, unitSystem)} $unit',
-                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: colorScheme.onSurfaceVariant),
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                   ),
                   const SizedBox(height: 2),
                   GestureDetector(

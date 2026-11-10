@@ -1,5 +1,7 @@
 import 'dart:math';
+
 import 'package:dio/dio.dart';
+
 import '../storage/preferences_service.dart';
 
 class MockNetworkInterceptor extends Interceptor {
@@ -9,7 +11,10 @@ class MockNetworkInterceptor extends Interceptor {
   MockNetworkInterceptor(this._prefs);
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
     final simulateLatency = _prefs.getSimulateLatency();
     final simulateError = _prefs.getSimulateError();
 
@@ -25,8 +30,11 @@ class MockNetworkInterceptor extends Interceptor {
           response: Response(
             requestOptions: options,
             statusCode: 503,
-            statusMessage: 'Service Unavailable (Simulated Recruiter Debug Error)',
-            data: {'error': 'Tournament server unreachable. Offline local persistence active.'},
+            statusMessage:
+                'Service Unavailable (Simulated Recruiter Debug Error)',
+            data: {
+              'error': 'Tournament server unreachable. Offline local persistence active.',
+            },
           ),
           type: DioExceptionType.badResponse,
         ),

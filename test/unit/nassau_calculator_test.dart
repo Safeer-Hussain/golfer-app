@@ -15,8 +15,18 @@ void main() {
       final p1Scores = List.generate(18, (index) {
         final holeNum = index + 1;
         final par = course.getHole(holeNum).par;
-        if (holeNum <= 3) return HoleScoreModel(holeNumber: holeNum, strokes: par - 1); // Birdies
-        if (holeNum >= 4 && holeNum <= 6) return HoleScoreModel(holeNumber: holeNum, strokes: par + 1); // Bogeys
+        if (holeNum <= 3) {
+          return HoleScoreModel(
+            holeNumber: holeNum,
+            strokes: par - 1,
+          ); // Birdies
+        }
+        if (holeNum >= 4 && holeNum <= 6) {
+          return HoleScoreModel(
+            holeNumber: holeNum,
+            strokes: par + 1,
+          ); // Bogeys
+        }
         return HoleScoreModel(holeNumber: holeNum, strokes: par); // Pars
       });
 
@@ -41,11 +51,17 @@ void main() {
       // P1 won 3 holes (1,2,3), P2 won 3 holes (4,5,6), remaining 12 halved
       // Front 9: P1 (3), P2 (3) -> Halved
       expect(result.front9.margin, 0);
-      expect(result.front9.getStatusDisplay('Player 1', 'Player 2'), 'Halved (Push)');
+      expect(
+        result.front9.getStatusDisplay('Player 1', 'Player 2'),
+        'Halved (Push)',
+      );
 
       // Back 9: All halved
       expect(result.back9.margin, 0);
-      expect(result.back9.getStatusDisplay('Player 1', 'Player 2'), 'Halved (Push)');
+      expect(
+        result.back9.getStatusDisplay('Player 1', 'Player 2'),
+        'Halved (Push)',
+      );
 
       // Overall: All square / Halved
       expect(result.overall.margin, 0);
@@ -58,7 +74,10 @@ void main() {
         final holeNum = index + 1;
         final par = course.getHole(holeNum).par;
         if (holeNum == 1 || holeNum == 2) {
-          return HoleScoreModel(holeNumber: holeNum, strokes: par - 1); // Birdie
+          return HoleScoreModel(
+            holeNumber: holeNum,
+            strokes: par - 1,
+          ); // Birdie
         }
         return HoleScoreModel(holeNumber: holeNum, strokes: par); // Par
       });
@@ -84,7 +103,10 @@ void main() {
 
       // Front 9 has margin +2 (P1 is 2 UP)
       expect(result.front9.margin, 2);
-      expect(result.front9.getStatusDisplay('Safeer', 'Khan'), 'Safeer won 2 UP');
+      expect(
+        result.front9.getStatusDisplay('Safeer', 'Khan'),
+        'Safeer won 2 UP',
+      );
 
       // A press must have spawned starting on Hole 3 through Hole 9
       expect(result.presses.isNotEmpty, isTrue);
@@ -102,19 +124,71 @@ void main() {
     });
 
     test('computes balanced 4-player round-robin ledger summing to zero', () {
-      final p1 = const PlayerModel(id: 'p1', name: 'Safeer', handicapIndex: 4.2, avatarAsset: '', teeBox: 'Black', courseHandicap: 5);
-      final p2 = const PlayerModel(id: 'p2', name: 'Khan', handicapIndex: 8.4, avatarAsset: '', teeBox: 'Black', courseHandicap: 9);
-      final p3 = const PlayerModel(id: 'p3', name: 'Ali', handicapIndex: 14.0, avatarAsset: '', teeBox: 'Blue', courseHandicap: 16);
-      final p4 = const PlayerModel(id: 'p4', name: 'Zayd', handicapIndex: 18.0, avatarAsset: '', teeBox: 'White', courseHandicap: 20);
+      final p1 = const PlayerModel(
+        id: 'p1',
+        name: 'Safeer',
+        handicapIndex: 4.2,
+        avatarAsset: '',
+        teeBox: 'Black',
+        courseHandicap: 5,
+      );
+      final p2 = const PlayerModel(
+        id: 'p2',
+        name: 'Khan',
+        handicapIndex: 8.4,
+        avatarAsset: '',
+        teeBox: 'Black',
+        courseHandicap: 9,
+      );
+      final p3 = const PlayerModel(
+        id: 'p3',
+        name: 'Ali',
+        handicapIndex: 14.0,
+        avatarAsset: '',
+        teeBox: 'Blue',
+        courseHandicap: 16,
+      );
+      final p4 = const PlayerModel(
+        id: 'p4',
+        name: 'Zayd',
+        handicapIndex: 18.0,
+        avatarAsset: '',
+        teeBox: 'White',
+        courseHandicap: 20,
+      );
 
       final players = [p1, p2, p3, p4];
 
       // Seed varied scores across 18 holes
       final Map<String, List<HoleScoreModel>> scoresMap = {
-        'p1': List.generate(18, (i) => HoleScoreModel(holeNumber: i + 1, strokes: course.getHole(i + 1).par)),
-        'p2': List.generate(18, (i) => HoleScoreModel(holeNumber: i + 1, strokes: course.getHole(i + 1).par + (i % 2 == 0 ? 1 : 0))),
-        'p3': List.generate(18, (i) => HoleScoreModel(holeNumber: i + 1, strokes: course.getHole(i + 1).par + (i % 3 == 0 ? 1 : 0))),
-        'p4': List.generate(18, (i) => HoleScoreModel(holeNumber: i + 1, strokes: course.getHole(i + 1).par + 1)),
+        'p1': List.generate(
+          18,
+          (i) => HoleScoreModel(
+            holeNumber: i + 1,
+            strokes: course.getHole(i + 1).par,
+          ),
+        ),
+        'p2': List.generate(
+          18,
+          (i) => HoleScoreModel(
+            holeNumber: i + 1,
+            strokes: course.getHole(i + 1).par + (i % 2 == 0 ? 1 : 0),
+          ),
+        ),
+        'p3': List.generate(
+          18,
+          (i) => HoleScoreModel(
+            holeNumber: i + 1,
+            strokes: course.getHole(i + 1).par + (i % 3 == 0 ? 1 : 0),
+          ),
+        ),
+        'p4': List.generate(
+          18,
+          (i) => HoleScoreModel(
+            holeNumber: i + 1,
+            strokes: course.getHole(i + 1).par + 1,
+          ),
+        ),
       };
 
       final ledger = useCase.computeFlightNassauLedger(
@@ -128,13 +202,17 @@ void main() {
 
       final matchResults = ledger['matchResults'] as List<NassauMatchResult>;
       final netBalances = ledger['netBalances'] as Map<String, double>;
-      final settlements = ledger['settlementPayments'] as List<NassauLedgerPayment>;
+      final settlements =
+          ledger['settlementPayments'] as List<NassauLedgerPayment>;
 
       // 4 players in round-robin = 6 pairwise matches
       expect(matchResults.length, 6);
 
       // Ledger balancing test: Sum of all balances MUST equal 0.00
-      final totalBalance = netBalances.values.fold<double>(0.0, (sum, val) => sum + val);
+      final totalBalance = netBalances.values.fold<double>(
+        0.0,
+        (sum, val) => sum + val,
+      );
       expect(totalBalance.abs(), lessThan(0.001));
 
       // If there are settlements, total payments from debtors equals creditors

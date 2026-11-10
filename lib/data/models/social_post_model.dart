@@ -88,7 +88,8 @@ class SocialPostModel {
     return SocialPostModel(
       id: json['id'] as String,
       authorName: json['authorName'] as String,
-      authorAvatar: json['authorAvatar'] as String? ?? 'assets/images/avatar_safeer.png',
+      authorAvatar:
+          json['authorAvatar'] as String? ?? 'assets/images/avatar_safeer.png',
       timestamp: DateTime.parse(json['timestamp'] as String),
       courseName: json['courseName'] as String? ?? 'Championship Course',
       scoreGross: json['scoreGross'] as int?,
@@ -137,7 +138,8 @@ class SocialCommentModel {
       id: json['id'] as String,
       postId: json['postId'] as String,
       authorName: json['authorName'] as String,
-      authorAvatar: json['authorAvatar'] as String? ?? 'assets/images/avatar_player2.png',
+      authorAvatar:
+          json['authorAvatar'] as String? ?? 'assets/images/avatar_player2.png',
       content: json['content'] as String,
       timestamp: DateTime.parse(json['timestamp'] as String),
     );

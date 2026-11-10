@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+
 import '../ai_caddie_controller.dart';
 import 'dispersion_indicator.dart';
 
 class CaddieChatBubble extends StatelessWidget {
   final CaddieChatMessage message;
 
-  const CaddieChatBubble({
-    super.key,
-    required this.message,
-  });
+  const CaddieChatBubble({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +16,9 @@ class CaddieChatBubble extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: Row(
-        mainAxisAlignment: isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment: isUser
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (!isUser) ...[
@@ -30,7 +30,11 @@ class CaddieChatBubble extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(color: colorScheme.primary, width: 1.5),
               ),
-              child: Icon(Icons.smart_toy_rounded, size: 18, color: colorScheme.primary),
+              child: Icon(
+                Icons.smart_toy_rounded,
+                size: 18,
+                color: colorScheme.primary,
+              ),
             ),
             const SizedBox(width: 8),
           ],
@@ -38,7 +42,9 @@ class CaddieChatBubble extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               decoration: BoxDecoration(
-                color: isUser ? colorScheme.primary : colorScheme.surfaceContainer,
+                color: isUser
+                    ? colorScheme.primary
+                    : colorScheme.surfaceContainer,
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(16),
                   topRight: const Radius.circular(16),
@@ -46,7 +52,9 @@ class CaddieChatBubble extends StatelessWidget {
                   bottomRight: Radius.circular(isUser ? 4 : 16),
                 ),
                 border: Border.all(
-                  color: isUser ? colorScheme.primary : colorScheme.outlineVariant,
+                  color: isUser
+                      ? colorScheme.primary
+                      : colorScheme.outlineVariant,
                 ),
               ),
               child: Column(
@@ -57,18 +65,25 @@ class CaddieChatBubble extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 13,
                       height: 1.4,
-                      color: isUser ? colorScheme.onPrimary : colorScheme.onSurface,
+                      color: isUser
+                          ? colorScheme.onPrimary
+                          : colorScheme.onSurface,
                     ),
                   ),
                   if (message.recommendation != null)
-                    DispersionIndicator(recommendation: message.recommendation!),
+                    DispersionIndicator(
+                      recommendation: message.recommendation!,
+                    ),
                   const SizedBox(height: 4),
                   Text(
                     '${message.timestamp.hour.toString().padLeft(2, "0")}:${message.timestamp.minute.toString().padLeft(2, "0")}',
                     style: TextStyle(
                       fontSize: 9,
-                      color: (isUser ? colorScheme.onPrimary : colorScheme.onSurfaceVariant)
-                          .withValues(alpha: 0.7),
+                      color:
+                          (isUser
+                                  ? colorScheme.onPrimary
+                                  : colorScheme.onSurfaceVariant)
+                              .withValues(alpha: 0.7),
                     ),
                   ),
                 ],
@@ -79,7 +94,9 @@ class CaddieChatBubble extends StatelessWidget {
             const SizedBox(width: 8),
             CircleAvatar(
               radius: 16,
-              backgroundImage: const AssetImage('assets/images/avatar_safeer.png'),
+              backgroundImage: const AssetImage(
+                'assets/images/avatar_safeer.png',
+              ),
             ),
           ],
         ],

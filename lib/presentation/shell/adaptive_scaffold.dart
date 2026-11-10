@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../core/di/service_locator.dart';
 import '../../core/theme/theme_controller.dart';
 import '../ai_caddie/ai_caddie_view.dart';
@@ -13,10 +14,7 @@ import 'recruiter_debug_drawer.dart';
 class AdaptiveScaffold extends StatefulWidget {
   final int initialIndex;
 
-  const AdaptiveScaffold({
-    super.key,
-    this.initialIndex = 0,
-  });
+  const AdaptiveScaffold({super.key, this.initialIndex = 0});
 
   @override
   State<AdaptiveScaffold> createState() => _AdaptiveScaffoldState();
@@ -85,7 +83,8 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final themeController = sl<ThemeController>();
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
@@ -129,7 +128,9 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
           actions: [
             IconButton(
               icon: Icon(
-                themeController.isDarkMode ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+                themeController.isDarkMode
+                    ? Icons.light_mode_outlined
+                    : Icons.dark_mode_outlined,
                 size: isLandscape ? 18 : 22,
                 color: colorScheme.onSurfaceVariant,
               ),
@@ -140,7 +141,9 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
               icon: Icon(
                 Icons.settings_outlined,
                 size: isLandscape ? 18 : 22,
-                color: _currentIndex == 5 ? colorScheme.primary : colorScheme.onSurfaceVariant,
+                color: _currentIndex == 5
+                    ? colorScheme.primary
+                    : colorScheme.onSurfaceVariant,
               ),
               tooltip: 'Settings',
               onPressed: () => onNavigate(5),
@@ -169,42 +172,80 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                           child: IntrinsicHeight(
                             child: NavigationRail(
                               minWidth: 56,
-                              selectedIndex: _currentIndex > 4 ? 0 : _currentIndex,
+                              selectedIndex: _currentIndex > 4
+                                  ? 0
+                                  : _currentIndex,
                               onDestinationSelected: onNavigate,
                               labelType: NavigationRailLabelType.none,
                               backgroundColor: colorScheme.surfaceContainer,
-                              indicatorColor: colorScheme.primary.withValues(alpha: 0.2),
+                              indicatorColor: colorScheme.primary.withValues(
+                                alpha: 0.2,
+                              ),
                               destinations: [
                                 NavigationRailDestination(
-                                  icon: Icon(Icons.group_outlined, color: colorScheme.onSurfaceVariant),
-                                  selectedIcon: Icon(Icons.group_rounded, color: colorScheme.primary),
+                                  icon: Icon(
+                                    Icons.group_outlined,
+                                    color: colorScheme.onSurfaceVariant,
+                                  ),
+                                  selectedIcon: Icon(
+                                    Icons.group_rounded,
+                                    color: colorScheme.primary,
+                                  ),
                                   label: const Text('Flight'),
                                 ),
                                 NavigationRailDestination(
-                                  icon: Icon(Icons.format_list_numbered_outlined, color: colorScheme.onSurfaceVariant),
-                                  selectedIcon: Icon(Icons.format_list_numbered_rounded, color: colorScheme.primary),
+                                  icon: Icon(
+                                    Icons.format_list_numbered_outlined,
+                                    color: colorScheme.onSurfaceVariant,
+                                  ),
+                                  selectedIcon: Icon(
+                                    Icons.format_list_numbered_rounded,
+                                    color: colorScheme.primary,
+                                  ),
                                   label: const Text('Scorecard'),
                                 ),
                                 NavigationRailDestination(
-                                  icon: Icon(Icons.my_location_outlined, color: colorScheme.onSurfaceVariant),
-                                  selectedIcon: Icon(Icons.my_location_rounded, color: colorScheme.primary),
+                                  icon: Icon(
+                                    Icons.my_location_outlined,
+                                    color: colorScheme.onSurfaceVariant,
+                                  ),
+                                  selectedIcon: Icon(
+                                    Icons.my_location_rounded,
+                                    color: colorScheme.primary,
+                                  ),
                                   label: const Text('Rangefinder'),
                                 ),
                                 NavigationRailDestination(
-                                  icon: Icon(Icons.smart_toy_outlined, color: colorScheme.onSurfaceVariant),
-                                  selectedIcon: Icon(Icons.smart_toy_rounded, color: colorScheme.primary),
+                                  icon: Icon(
+                                    Icons.smart_toy_outlined,
+                                    color: colorScheme.onSurfaceVariant,
+                                  ),
+                                  selectedIcon: Icon(
+                                    Icons.smart_toy_rounded,
+                                    color: colorScheme.primary,
+                                  ),
                                   label: const Text('Caddie'),
                                 ),
                                 NavigationRailDestination(
-                                  icon: Icon(Icons.military_tech_outlined, color: colorScheme.onSurfaceVariant),
-                                  selectedIcon: Icon(Icons.military_tech_rounded, color: colorScheme.primary),
+                                  icon: Icon(
+                                    Icons.military_tech_outlined,
+                                    color: colorScheme.onSurfaceVariant,
+                                  ),
+                                  selectedIcon: Icon(
+                                    Icons.military_tech_rounded,
+                                    color: colorScheme.primary,
+                                  ),
                                   label: const Text('Clubhouse'),
                                 ),
                               ],
                             ),
                           ),
                         ),
-                        VerticalDivider(width: 1, thickness: 1, color: colorScheme.outlineVariant),
+                        VerticalDivider(
+                          width: 1,
+                          thickness: 1,
+                          color: colorScheme.outlineVariant,
+                        ),
                         Expanded(child: _buildBody()),
                       ],
                     )
@@ -223,28 +264,58 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                 elevation: 3,
                 destinations: [
                   NavigationDestination(
-                    icon: Icon(Icons.group_outlined, color: colorScheme.onSurfaceVariant),
-                    selectedIcon: Icon(Icons.group_rounded, color: colorScheme.primary),
+                    icon: Icon(
+                      Icons.group_outlined,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                    selectedIcon: Icon(
+                      Icons.group_rounded,
+                      color: colorScheme.primary,
+                    ),
                     label: 'Flight',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.format_list_numbered_outlined, color: colorScheme.onSurfaceVariant),
-                    selectedIcon: Icon(Icons.format_list_numbered_rounded, color: colorScheme.primary),
+                    icon: Icon(
+                      Icons.format_list_numbered_outlined,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                    selectedIcon: Icon(
+                      Icons.format_list_numbered_rounded,
+                      color: colorScheme.primary,
+                    ),
                     label: 'Scorecard',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.my_location_outlined, color: colorScheme.onSurfaceVariant),
-                    selectedIcon: Icon(Icons.my_location_rounded, color: colorScheme.primary),
+                    icon: Icon(
+                      Icons.my_location_outlined,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                    selectedIcon: Icon(
+                      Icons.my_location_rounded,
+                      color: colorScheme.primary,
+                    ),
                     label: 'GPS Map',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.smart_toy_outlined, color: colorScheme.onSurfaceVariant),
-                    selectedIcon: Icon(Icons.smart_toy_rounded, color: colorScheme.primary),
+                    icon: Icon(
+                      Icons.smart_toy_outlined,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                    selectedIcon: Icon(
+                      Icons.smart_toy_rounded,
+                      color: colorScheme.primary,
+                    ),
                     label: 'AI Caddie',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.military_tech_outlined, color: colorScheme.onSurfaceVariant),
-                    selectedIcon: Icon(Icons.military_tech_rounded, color: colorScheme.primary),
+                    icon: Icon(
+                      Icons.military_tech_outlined,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                    selectedIcon: Icon(
+                      Icons.military_tech_rounded,
+                      color: colorScheme.primary,
+                    ),
                     label: 'Clubhouse',
                   ),
                 ],

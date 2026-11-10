@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+
 import '../../../domain/usecases/caddie_strategy_usecase.dart';
 
 class DispersionIndicator extends StatelessWidget {
   final CaddieRecommendation recommendation;
 
-  const DispersionIndicator({
-    super.key,
-    required this.recommendation,
-  });
+  const DispersionIndicator({super.key, required this.recommendation});
 
   @override
   Widget build(BuildContext context) {

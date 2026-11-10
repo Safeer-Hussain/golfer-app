@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../data/models/player_model.dart';
 import '../../../data/models/round_scorecard_model.dart';
 import '../../../domain/entities/course_entity.dart';
@@ -37,14 +38,22 @@ class RoundSummaryTabs extends StatelessWidget {
     );
   }
 
-  Widget _buildMatrixTable(BuildContext context, int startHole, int endHole, String title) {
+  Widget _buildMatrixTable(
+    BuildContext context,
+    int startHole,
+    int endHole,
+    String title,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
-    final holesInRange = course.holes.where(
-      (h) => h.holeNumber >= startHole && h.holeNumber <= endHole,
-    ).toList();
+    final holesInRange = course.holes
+        .where((h) => h.holeNumber >= startHole && h.holeNumber <= endHole)
+        .toList();
 
     final parTotal = holesInRange.fold<int>(0, (sum, h) => sum + h.par);
-    final ydsTotal = holesInRange.fold<int>(0, (sum, h) => sum + h.yardageForTee(teeBox));
+    final ydsTotal = holesInRange.fold<int>(
+      0,
+      (sum, h) => sum + h.yardageForTee(teeBox),
+    );
 
     return Card(
       color: colorScheme.surfaceContainer,
@@ -86,29 +95,55 @@ class RoundSummaryTabs extends StatelessWidget {
               physics: const ClampingScrollPhysics(),
               child: Table(
                 defaultColumnWidth: const FixedColumnWidth(42),
-                columnWidths: const {
-                  0: FixedColumnWidth(110),
-                },
-                border: TableBorder.all(color: colorScheme.outlineVariant, width: 0.5),
+                columnWidths: const {0: FixedColumnWidth(110)},
+                border: TableBorder.all(
+                  color: colorScheme.outlineVariant,
+                  width: 0.5,
+                ),
                 children: [
                   // Hole Headers
                   TableRow(
-                    decoration: BoxDecoration(color: colorScheme.surfaceContainerHighest),
+                    decoration: BoxDecoration(
+                      color: colorScheme.surfaceContainerHighest,
+                    ),
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(6),
-                        child: Text('HOLE', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: colorScheme.onSurface)),
+                        child: Text(
+                          'HOLE',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: colorScheme.onSurface,
+                          ),
+                        ),
                       ),
-                      ...holesInRange.map((h) => Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(6),
-                              child: Text('${h.holeNumber}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: colorScheme.onSurface)),
+                      ...holesInRange.map(
+                        (h) => Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(6),
+                            child: Text(
+                              '${h.holeNumber}',
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                color: colorScheme.onSurface,
+                              ),
                             ),
-                          )),
+                          ),
+                        ),
+                      ),
                       Center(
                         child: Padding(
                           padding: const EdgeInsets.all(6),
-                          child: Text('TOT', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: colorScheme.primary)),
+                          child: Text(
+                            'TOT',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: colorScheme.primary,
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -118,18 +153,39 @@ class RoundSummaryTabs extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(6),
-                        child: Text('PAR', style: TextStyle(fontSize: 10, color: colorScheme.onSurfaceVariant)),
+                        child: Text(
+                          'PAR',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                        ),
                       ),
-                      ...holesInRange.map((h) => Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(6),
-                              child: Text('${h.par}', style: TextStyle(fontSize: 10, color: colorScheme.onSurfaceVariant)),
+                      ...holesInRange.map(
+                        (h) => Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(6),
+                            child: Text(
+                              '${h.par}',
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: colorScheme.onSurfaceVariant,
+                              ),
                             ),
-                          )),
+                          ),
+                        ),
+                      ),
                       Center(
                         child: Padding(
                           padding: const EdgeInsets.all(6),
-                          child: Text('$parTotal', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: colorScheme.onSurfaceVariant)),
+                          child: Text(
+                            '$parTotal',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: colorScheme.onSurfaceVariant,
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -141,8 +197,12 @@ class RoundSummaryTabs extends StatelessWidget {
                     final cells = <Widget>[];
 
                     for (final h in holesInRange) {
-                      final match = scores.where((s) => s.holeNumber == h.holeNumber);
-                      final strokes = match.isNotEmpty ? match.first.strokes : h.par;
+                      final match = scores.where(
+                        (s) => s.holeNumber == h.holeNumber,
+                      );
+                      final strokes = match.isNotEmpty
+                          ? match.first.strokes
+                          : h.par;
                       subtotal += strokes;
                       cells.add(_buildScoreCell(context, strokes, h.par));
                     }
@@ -156,7 +216,9 @@ class RoundSummaryTabs extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
-                              color: player.isCurrentDeviceUser ? colorScheme.primary : colorScheme.onSurface,
+                              color: player.isCurrentDeviceUser
+                                  ? colorScheme.primary
+                                  : colorScheme.onSurface,
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -168,7 +230,11 @@ class RoundSummaryTabs extends StatelessWidget {
                             padding: const EdgeInsets.all(6),
                             child: Text(
                               '$subtotal',
-                              style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: colorScheme.onSurface),
+                              style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                                color: colorScheme.onSurface,
+                              ),
                             ),
                           ),
                         ),

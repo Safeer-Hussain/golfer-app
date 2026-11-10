@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/di/service_locator.dart';
 import '../../../domain/entities/nassau_match_entity.dart';
 import '../../../domain/usecases/nassau_calculator_usecase.dart';
@@ -7,10 +8,7 @@ import '../scorecard_controller.dart';
 class NassauPressModal extends StatefulWidget {
   final ScorecardController controller;
 
-  const NassauPressModal({
-    super.key,
-    required this.controller,
-  });
+  const NassauPressModal({super.key, required this.controller});
 
   @override
   State<NassauPressModal> createState() => _NassauPressModalState();
@@ -25,7 +23,8 @@ class _NassauPressModalState extends State<NassauPressModal> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     final nassauUseCase = sl<NassauCalculatorUseCase>();
     final players = widget.controller.players;
@@ -44,7 +43,8 @@ class _NassauPressModalState extends State<NassauPressModal> {
 
     final matchResults = ledgerData['matchResults'] as List<NassauMatchResult>;
     final netBalances = ledgerData['netBalances'] as Map<String, double>;
-    final settlements = ledgerData['settlementPayments'] as List<NassauLedgerPayment>;
+    final settlements =
+        ledgerData['settlementPayments'] as List<NassauLedgerPayment>;
 
     Widget buildConfigCard() {
       return Container(
@@ -77,8 +77,12 @@ class _NassauPressModalState extends State<NassauPressModal> {
                         '\$${stake.toInt()}',
                         style: TextStyle(
                           fontSize: 11,
-                          fontWeight: isSel ? FontWeight.bold : FontWeight.normal,
-                          color: isSel ? colorScheme.onPrimary : colorScheme.onSurface,
+                          fontWeight: isSel
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                          color: isSel
+                              ? colorScheme.onPrimary
+                              : colorScheme.onSurface,
                         ),
                       ),
                       selected: isSel,
@@ -167,7 +171,9 @@ class _NassauPressModalState extends State<NassauPressModal> {
               : colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: isPress ? colorScheme.secondary.withValues(alpha: 0.4) : colorScheme.outlineVariant,
+            color: isPress
+                ? colorScheme.secondary.withValues(alpha: 0.4)
+                : colorScheme.outlineVariant,
           ),
         ),
         child: Row(
@@ -180,7 +186,11 @@ class _NassauPressModalState extends State<NassauPressModal> {
                   Row(
                     children: [
                       if (isPress) ...[
-                        Icon(Icons.bolt_rounded, size: 14, color: colorScheme.secondary),
+                        Icon(
+                          Icons.bolt_rounded,
+                          size: 14,
+                          color: colorScheme.secondary,
+                        ),
                         const SizedBox(width: 4),
                       ],
                       Text(
@@ -188,7 +198,9 @@ class _NassauPressModalState extends State<NassauPressModal> {
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
-                          color: isPress ? colorScheme.secondary : colorScheme.onSurface,
+                          color: isPress
+                              ? colorScheme.secondary
+                              : colorScheme.onSurface,
                         ),
                       ),
                     ],
@@ -214,7 +226,9 @@ class _NassauPressModalState extends State<NassauPressModal> {
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
-                  color: sub.margin != 0 ? colorScheme.primary : colorScheme.onSurfaceVariant,
+                  color: sub.margin != 0
+                      ? colorScheme.primary
+                      : colorScheme.onSurfaceVariant,
                 ),
               ),
             ),
@@ -233,7 +247,10 @@ class _NassauPressModalState extends State<NassauPressModal> {
         );
       }
 
-      final activeIndex = _selectedPairingIndex.clamp(0, matchResults.length - 1);
+      final activeIndex = _selectedPairingIndex.clamp(
+        0,
+        matchResults.length - 1,
+      );
       final res = matchResults[activeIndex];
       final p1 = players.firstWhere((p) => p.id == res.player1Id);
       final p2 = players.firstWhere((p) => p.id == res.player2Id);
@@ -248,8 +265,16 @@ class _NassauPressModalState extends State<NassauPressModal> {
               children: matchResults.asMap().entries.map((entry) {
                 final idx = entry.key;
                 final m = entry.value;
-                final name1 = players.firstWhere((p) => p.id == m.player1Id).name.split(' ').first;
-                final name2 = players.firstWhere((p) => p.id == m.player2Id).name.split(' ').first;
+                final name1 = players
+                    .firstWhere((p) => p.id == m.player1Id)
+                    .name
+                    .split(' ')
+                    .first;
+                final name2 = players
+                    .firstWhere((p) => p.id == m.player2Id)
+                    .name
+                    .split(' ')
+                    .first;
                 final isSel = idx == activeIndex;
 
                 return Padding(
@@ -260,13 +285,16 @@ class _NassauPressModalState extends State<NassauPressModal> {
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: isSel ? FontWeight.bold : FontWeight.normal,
-                        color: isSel ? colorScheme.onPrimary : colorScheme.onSurface,
+                        color: isSel
+                            ? colorScheme.onPrimary
+                            : colorScheme.onSurface,
                       ),
                     ),
                     selected: isSel,
                     selectedColor: colorScheme.primary,
                     backgroundColor: colorScheme.surfaceContainer,
-                    onSelected: (_) => setState(() => _selectedPairingIndex = idx),
+                    onSelected: (_) =>
+                        setState(() => _selectedPairingIndex = idx),
                   ),
                 );
               }).toList(),
@@ -285,7 +313,10 @@ class _NassauPressModalState extends State<NassauPressModal> {
               padding: const EdgeInsets.symmetric(vertical: 4),
               child: Text(
                 'No 2-down presses triggered yet in this pairing.',
-                style: TextStyle(fontSize: 10, color: colorScheme.onSurfaceVariant),
+                style: TextStyle(
+                  fontSize: 10,
+                  color: colorScheme.onSurfaceVariant,
+                ),
               ),
             ),
           ],
@@ -332,7 +363,9 @@ class _NassauPressModalState extends State<NassauPressModal> {
               final isNegative = bal < -0.01;
               final color = isPositive
                   ? colorScheme.primary
-                  : (isNegative ? colorScheme.error : colorScheme.onSurfaceVariant);
+                  : (isNegative
+                        ? colorScheme.error
+                        : colorScheme.onSurfaceVariant);
 
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
@@ -343,14 +376,18 @@ class _NassauPressModalState extends State<NassauPressModal> {
                       p.name,
                       style: TextStyle(
                         fontSize: 12,
-                        fontWeight: p.isCurrentDeviceUser ? FontWeight.bold : FontWeight.normal,
+                        fontWeight: p.isCurrentDeviceUser
+                            ? FontWeight.bold
+                            : FontWeight.normal,
                         color: colorScheme.onSurface,
                       ),
                     ),
                     Text(
                       isPositive
                           ? '+\$${bal.toStringAsFixed(2)}'
-                          : (isNegative ? '-\$${bal.abs().toStringAsFixed(2)}' : '\$0.00'),
+                          : (isNegative
+                                ? '-\$${bal.abs().toStringAsFixed(2)}'
+                                : '\$0.00'),
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -372,26 +409,31 @@ class _NassauPressModalState extends State<NassauPressModal> {
                 ),
               ),
               const SizedBox(height: 4),
-              ...settlements.map((s) => Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 2),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          s.description,
-                          style: TextStyle(fontSize: 11, color: colorScheme.onSurface),
+              ...settlements.map(
+                (s) => Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        s.description,
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: colorScheme.onSurface,
                         ),
-                        Text(
-                          '\$${s.amount.toStringAsFixed(2)}',
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                            color: colorScheme.primary,
-                          ),
+                      ),
+                      Text(
+                        '\$${s.amount.toStringAsFixed(2)}',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: colorScheme.primary,
                         ),
-                      ],
-                    ),
-                  )),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ],
         ),
@@ -408,13 +450,20 @@ class _NassauPressModalState extends State<NassauPressModal> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 10,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.handshake_outlined, color: colorScheme.primary, size: 20),
+                        Icon(
+                          Icons.handshake_outlined,
+                          color: colorScheme.primary,
+                          size: 20,
+                        ),
                         const SizedBox(width: 8),
                         Text(
                           'Nassau Press Side-Bet Calculator',
@@ -427,7 +476,10 @@ class _NassauPressModalState extends State<NassauPressModal> {
                       ],
                     ),
                     IconButton(
-                      icon: Icon(Icons.close_rounded, color: colorScheme.onSurfaceVariant),
+                      icon: Icon(
+                        Icons.close_rounded,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                       onPressed: () => Navigator.of(context).pop(),
                       visualDensity: VisualDensity.compact,
                     ),
@@ -452,7 +504,10 @@ class _NassauPressModalState extends State<NassauPressModal> {
                               ),
                             ),
                           ),
-                          VerticalDivider(width: 1, color: colorScheme.outlineVariant),
+                          VerticalDivider(
+                            width: 1,
+                            color: colorScheme.outlineVariant,
+                          ),
                           Expanded(
                             child: SingleChildScrollView(
                               physics: const ClampingScrollPhysics(),

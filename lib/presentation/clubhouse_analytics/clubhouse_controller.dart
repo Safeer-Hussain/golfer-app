@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../data/models/club_model.dart';
 import '../../data/models/social_post_model.dart';
 import '../../data/repositories/club_bag_repository.dart';
@@ -40,16 +41,19 @@ class ClubhouseController extends ChangeNotifier {
 
     final post = _posts[idx];
     final isLikedNow = !post.isLikedByMe;
-    final newCount = isLikedNow ? post.likesCount + 1 : (post.likesCount > 0 ? post.likesCount - 1 : 0);
+    final newCount = isLikedNow
+        ? post.likesCount + 1
+        : (post.likesCount > 0 ? post.likesCount - 1 : 0);
 
     // Instant optimistic update
-    _posts[idx] = post.copyWith(
-      isLikedByMe: isLikedNow,
-      likesCount: newCount,
-    );
+    _posts[idx] = post.copyWith(isLikedByMe: isLikedNow, likesCount: newCount);
     notifyListeners();
 
-    await _clubhouseRepository.togglePostLike(postId, post.likesCount, post.isLikedByMe);
+    await _clubhouseRepository.togglePostLike(
+      postId,
+      post.likesCount,
+      post.isLikedByMe,
+    );
   }
 
   Future<void> createMilestonePost({
@@ -107,8 +111,15 @@ class ClubhouseController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateClubCalibration(ClubModel club, int carryYards, int totalYards) async {
-    final updated = club.copyWith(carryYards: carryYards, totalYards: totalYards);
+  Future<void> updateClubCalibration(
+    ClubModel club,
+    int carryYards,
+    int totalYards,
+  ) async {
+    final updated = club.copyWith(
+      carryYards: carryYards,
+      totalYards: totalYards,
+    );
     final idx = _clubs.indexWhere((c) => c.id == club.id);
     if (idx != -1) {
       _clubs[idx] = updated;

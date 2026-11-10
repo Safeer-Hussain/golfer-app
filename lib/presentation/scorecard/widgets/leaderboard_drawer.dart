@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+
 import '../../../data/models/player_model.dart';
 import '../scorecard_controller.dart';
 
 class LeaderboardDrawer extends StatelessWidget {
   final ScorecardController controller;
 
-  const LeaderboardDrawer({
-    super.key,
-    required this.controller,
-  });
+  const LeaderboardDrawer({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +21,11 @@ class LeaderboardDrawer extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(Icons.leaderboard_rounded, color: colorScheme.primary, size: 24),
+                Icon(
+                  Icons.leaderboard_rounded,
+                  color: colorScheme.primary,
+                  size: 24,
+                ),
                 const SizedBox(width: 10),
                 Text(
                   'Flight Live Leaderboard',
@@ -83,7 +85,9 @@ class LeaderboardDrawer extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: rank == 1 ? colorScheme.onSecondary : colorScheme.onSurface,
+                          color: rank == 1
+                              ? colorScheme.onSecondary
+                              : colorScheme.onSurface,
                         ),
                       ),
                     ),
@@ -116,7 +120,10 @@ class LeaderboardDrawer extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: colorScheme.primary.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(8),

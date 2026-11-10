@@ -58,9 +58,9 @@ class HandicapCalculator {
     if (diff <= -3) return 5; // Albatross or better
     if (diff == -2) return 4; // Eagle
     if (diff == -1) return 3; // Birdie
-    if (diff == 0) return 2;  // Par
-    if (diff == 1) return 1;  // Bogey
-    return 0;                 // Double bogey or worse
+    if (diff == 0) return 2; // Par
+    if (diff == 1) return 1; // Bogey
+    return 0; // Double bogey or worse
   }
 
   static String formatScoreVsPar(int totalStrokes, int totalPar) {

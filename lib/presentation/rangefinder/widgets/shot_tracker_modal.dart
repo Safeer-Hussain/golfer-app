@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/utils/app_feedback.dart';
 import '../rangefinder_controller.dart';
 
@@ -23,7 +24,9 @@ class _ShotTrackerModalState extends State<ShotTrackerModal> {
   @override
   void initState() {
     super.initState();
-    _finalDistance = widget.measuredDistance > 0 ? widget.measuredDistance : 255;
+    _finalDistance = widget.measuredDistance > 0
+        ? widget.measuredDistance
+        : 255;
     if (widget.controller.availableClubs.isNotEmpty) {
       _selectedClubId = widget.controller.availableClubs.first.id;
     }
@@ -34,7 +37,9 @@ class _ShotTrackerModalState extends State<ShotTrackerModal> {
     await widget.controller.saveRecordedShot(_selectedClubId!, _finalDistance);
 
     if (!mounted) return;
-    final club = widget.controller.availableClubs.firstWhere((c) => c.id == _selectedClubId);
+    final club = widget.controller.availableClubs.firstWhere(
+      (c) => c.id == _selectedClubId,
+    );
     Navigator.of(context).pop();
     AppFeedback.showSuccess(
       context,
@@ -69,7 +74,10 @@ class _ShotTrackerModalState extends State<ShotTrackerModal> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.close_rounded, color: colorScheme.onSurfaceVariant),
+                    icon: Icon(
+                      Icons.close_rounded,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                 ],
@@ -80,7 +88,9 @@ class _ShotTrackerModalState extends State<ShotTrackerModal> {
                 decoration: BoxDecoration(
                   color: colorScheme.primary.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: colorScheme.primary.withValues(alpha: 0.3)),
+                  border: Border.all(
+                    color: colorScheme.primary.withValues(alpha: 0.3),
+                  ),
                 ),
                 alignment: Alignment.center,
                 child: Column(
@@ -119,13 +129,17 @@ class _ShotTrackerModalState extends State<ShotTrackerModal> {
               DropdownButtonFormField<String>(
                 initialValue: _selectedClubId,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   prefixIcon: const Icon(Icons.sports_golf_rounded),
                 ),
                 items: widget.controller.availableClubs.map((club) {
                   return DropdownMenuItem(
                     value: club.id,
-                    child: Text('${club.name} (${club.loft}) - Avg: ${club.carryYards}y'),
+                    child: Text(
+                      '${club.name} (${club.loft}) - Avg: ${club.carryYards}y',
+                    ),
                   );
                 }).toList(),
                 onChanged: (val) {
@@ -141,7 +155,9 @@ class _ShotTrackerModalState extends State<ShotTrackerModal> {
                   backgroundColor: colorScheme.primary,
                   foregroundColor: colorScheme.onPrimary,
                   padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
             ],

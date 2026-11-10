@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../domain/entities/hole_entity.dart';
 
 class HoleStepperCockpit extends StatelessWidget {
@@ -45,10 +46,14 @@ class HoleStepperCockpit extends StatelessWidget {
                     width: 34,
                     margin: const EdgeInsets.symmetric(horizontal: 3),
                     decoration: BoxDecoration(
-                      color: isSelected ? colorScheme.primary : colorScheme.surfaceContainerHighest,
+                      color: isSelected
+                          ? colorScheme.primary
+                          : colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color: isSelected ? colorScheme.primary : colorScheme.outlineVariant,
+                        color: isSelected
+                            ? colorScheme.primary
+                            : colorScheme.outlineVariant,
                       ),
                     ),
                     alignment: Alignment.center,
@@ -57,7 +62,9 @@ class HoleStepperCockpit extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        color: isSelected ? colorScheme.onPrimary : colorScheme.onSurface,
+                        color: isSelected
+                            ? colorScheme.onPrimary
+                            : colorScheme.onSurface,
                       ),
                     ),
                   ),

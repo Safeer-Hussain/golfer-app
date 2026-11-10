@@ -114,7 +114,10 @@ class NassauCalculatorUseCase {
         );
 
         // Automatic 2-Down Press Detection for Front 9
-        if (autoPress && front9.margin.abs() >= 2 && holeNum < 9 && !spawnedPressHoles.contains(holeNum)) {
+        if (autoPress &&
+            front9.margin.abs() >= 2 &&
+            holeNum < 9 &&
+            !spawnedPressHoles.contains(holeNum)) {
           spawnedPressHoles.add(holeNum);
           presses.add(
             NassauSubMatch(
@@ -142,7 +145,10 @@ class NassauCalculatorUseCase {
         );
 
         // Automatic 2-Down Press Detection for Back 9
-        if (autoPress && back9.margin.abs() >= 2 && holeNum < 18 && !spawnedPressHoles.contains(holeNum)) {
+        if (autoPress &&
+            back9.margin.abs() >= 2 &&
+            holeNum < 18 &&
+            !spawnedPressHoles.contains(holeNum)) {
           spawnedPressHoles.add(holeNum);
           presses.add(
             NassauSubMatch(
@@ -212,9 +218,7 @@ class NassauCalculatorUseCase {
     double pressStake = 10.0,
     bool useNetScore = true,
   }) {
-    final Map<String, double> netBalances = {
-      for (var p in players) p.id: 0.0,
-    };
+    final Map<String, double> netBalances = {for (var p in players) p.id: 0.0};
     final List<NassauMatchResult> matchResults = [];
 
     // Pairwise Round-Robin
@@ -239,8 +243,10 @@ class NassauCalculatorUseCase {
 
         matchResults.add(result);
 
-        netBalances[p1.id] = (netBalances[p1.id] ?? 0.0) + result.netPlayer1Winnings;
-        netBalances[p2.id] = (netBalances[p2.id] ?? 0.0) - result.netPlayer1Winnings;
+        netBalances[p1.id] =
+            (netBalances[p1.id] ?? 0.0) + result.netPlayer1Winnings;
+        netBalances[p2.id] =
+            (netBalances[p2.id] ?? 0.0) - result.netPlayer1Winnings;
       }
     }
 
@@ -268,7 +274,9 @@ class NassauCalculatorUseCase {
       final debtor = debCopy[dIdx];
       final creditor = credCopy[cIdx];
 
-      final settleAmount = debtor.value < creditor.value ? debtor.value : creditor.value;
+      final settleAmount = debtor.value < creditor.value
+          ? debtor.value
+          : creditor.value;
 
       if (settleAmount > 0.01) {
         final dPlayer = playerMap[debtor.key];
@@ -281,7 +289,8 @@ class NassauCalculatorUseCase {
             creditorId: creditor.key,
             creditorName: cPlayer?.name ?? 'Player',
             amount: settleAmount,
-            description: '${dPlayer?.name ?? "Player"} pays ${cPlayer?.name ?? "Player"}',
+            description:
+                '${dPlayer?.name ?? "Player"} pays ${cPlayer?.name ?? "Player"}',
           ),
         );
       }

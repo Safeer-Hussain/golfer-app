@@ -29,7 +29,11 @@ class CaddieShortcutChips extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(right: 8),
             child: ActionChip(
-              avatar: Icon(Icons.bolt_rounded, size: 14, color: colorScheme.secondary),
+              avatar: Icon(
+                Icons.bolt_rounded,
+                size: 14,
+                color: colorScheme.secondary,
+              ),
               label: Text(
                 prompt,
                 style: TextStyle(
@@ -40,7 +44,9 @@ class CaddieShortcutChips extends StatelessWidget {
               ),
               backgroundColor: colorScheme.surfaceContainer,
               side: BorderSide(color: colorScheme.outlineVariant),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
               onPressed: isDisabled ? null : () => onSelectPrompt(prompt),
             ),
           );

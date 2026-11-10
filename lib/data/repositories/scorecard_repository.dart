@@ -1,4 +1,5 @@
 import 'package:uuid/uuid.dart';
+
 import '../../core/constants/golf_courses.dart';
 import '../../core/storage/database_helper.dart';
 import '../../core/storage/preferences_service.dart';
@@ -15,7 +16,10 @@ class ScorecardRepository {
 
   RoundScorecardModel getOrCreateActiveScorecard(FlightModel flight) {
     final existing = _prefs.getActiveScorecard();
-    if (existing != null && existing.playerScores.keys.toSet().containsAll(flight.players.map((p) => p.id))) {
+    if (existing != null &&
+        existing.playerScores.keys.toSet().containsAll(
+          flight.players.map((p) => p.id),
+        )) {
       return existing;
     }
 
@@ -55,7 +59,10 @@ class ScorecardRepository {
     await _prefs.saveActiveScorecard(scorecard);
   }
 
-  Future<void> completeAndArchiveRound(RoundScorecardModel scorecard, String currentUserId) async {
+  Future<void> completeAndArchiveRound(
+    RoundScorecardModel scorecard,
+    String currentUserId,
+  ) async {
     final completed = scorecard.copyWith(isCompleted: true);
     await _prefs.saveActiveScorecard(completed);
 
