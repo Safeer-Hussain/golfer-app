@@ -45,7 +45,7 @@ class _SplashViewState extends State<SplashView>
     await Future<void>.delayed(const Duration(milliseconds: 600));
     if (!mounted) return;
     setState(() {
-      _statusText = 'Loading 18-hole scorecard matrix & GPS course vectors...';
+      _statusText = 'Loading 18-hole scorecard matrix & GPS course vectors..';
     });
 
     await Future<void>.delayed(const Duration(milliseconds: 600));
