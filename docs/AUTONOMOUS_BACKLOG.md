@@ -14,9 +14,9 @@ This backlog defines 25 granular daily engineering sprints for autonomous progre
   - 3:1 Tour tempo audio/visual metronome (e.g. 21/7 and 24/8 frames) with vibrating tactile beats and swing rhythm calibrator.
   - Tests: `test/unit/swing_tempo_test.dart`, `test/widget/swing_tempo_view_test.dart`.
 
-- [ ] **Sprint 4: USGA Handicap Differential Calculator & Equitable Stroke Control**
-  - Calculates score differentials `(113 / Slope) * (Adjusted Gross - Rating)` and enforces net double bogey maximum hole score adjustments.
-  - Tests: `test/unit/handicap_differential_test.dart`.
+- [x] **Sprint 4: USGA Handicap Differential Calculator & Equitable Stroke Control**
+  - Calculates score differentials `(113 / Slope) * (Adjusted Gross - Rating - PCC)`, enforces net double bogey maximum hole score adjustments (ESC), exceptional score reductions (ESR), and WHS 8-of-20 index averaging with soft/hard caps.
+  - Tests: `test/unit/handicap_differential_test.dart`, `test/widget/handicap_differential_view_test.dart`.
 
 - [ ] **Sprint 5: Tournament Skins Pot Splitter & Carryover Engine**
   - Low gross/net hole-by-hole skins tracker with automatic carryovers, validation modal, and payout ledger.

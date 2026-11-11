@@ -5,6 +5,7 @@ import '../../core/di/service_locator.dart';
 import '../../core/theme/theme_controller.dart';
 import '../../core/utils/app_feedback.dart';
 import '../green_reading/green_reading_view.dart';
+import '../handicap_differential/handicap_differential_view.dart';
 import '../shell/recruiter_debug_drawer.dart';
 import '../swing_tempo/swing_tempo_view.dart';
 import 'settings_controller.dart';
@@ -203,6 +204,39 @@ class SettingsView extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute<void>(
                             builder: (_) => const GreenReadingView(),
+                          ),
+                        );
+                      },
+                    ),
+                    const Divider(height: 1),
+                    ListTile(
+                      leading: Icon(
+                        Icons.calculate_outlined,
+                        color: colorScheme.tertiary,
+                      ),
+                      title: Text(
+                        'USGA Handicap Differential & ESC',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: colorScheme.onSurface,
+                        ),
+                      ),
+                      subtitle: Text(
+                        'WHS 8-of-20 differential calculation & Net Double Bogey truncation',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 14,
+                      ),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => const HandicapDifferentialView(),
                           ),
                         );
                       },

@@ -12,12 +12,14 @@ import '../../data/repositories/scorecard_repository.dart';
 import '../../domain/usecases/caddie_strategy_usecase.dart';
 import '../../domain/usecases/calculate_score_usecase.dart';
 import '../../domain/usecases/green_reading_usecase.dart';
+import '../../domain/usecases/handicap_differential_usecase.dart';
 import '../../domain/usecases/nassau_calculator_usecase.dart';
 import '../../domain/usecases/swing_tempo_usecase.dart';
 import '../../presentation/ai_caddie/ai_caddie_controller.dart';
 import '../../presentation/clubhouse_analytics/clubhouse_controller.dart';
 import '../../presentation/flight_setup/flight_setup_controller.dart';
 import '../../presentation/green_reading/green_reading_controller.dart';
+import '../../presentation/handicap_differential/handicap_differential_controller.dart';
 import '../../presentation/rangefinder/rangefinder_controller.dart';
 import '../../presentation/scorecard/scorecard_controller.dart';
 import '../../presentation/settings/settings_controller.dart';
@@ -62,6 +64,9 @@ Future<void> setupServiceLocator({SharedPreferences? mockPrefs}) async {
   sl.registerSingleton<NassauCalculatorUseCase>(NassauCalculatorUseCase());
   sl.registerSingleton<GreenReadingUseCase>(GreenReadingUseCase());
   sl.registerSingleton<SwingTempoUseCase>(SwingTempoUseCase());
+  sl.registerSingleton<HandicapDifferentialUseCase>(
+    HandicapDifferentialUseCase(),
+  );
 
   // Controllers
   sl.registerSingleton<ThemeController>(
@@ -114,6 +119,13 @@ Future<void> setupServiceLocator({SharedPreferences? mockPrefs}) async {
 
   sl.registerSingleton<SwingTempoController>(
     SwingTempoController(sl<SwingTempoUseCase>()),
+  );
+
+  sl.registerSingleton<HandicapDifferentialController>(
+    HandicapDifferentialController(
+      sl<HandicapDifferentialUseCase>(),
+      sl<ScorecardController>(),
+    ),
   );
 
   sl.registerSingleton<SettingsController>(

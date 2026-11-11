@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/di/service_locator.dart';
 import '../green_reading/green_reading_view.dart';
+import '../handicap_differential/handicap_differential_view.dart';
 import '../swing_tempo/swing_tempo_view.dart';
 import 'scorecard_controller.dart';
 import 'widgets/hole_stepper_cockpit.dart';
@@ -52,6 +53,12 @@ class _ScorecardViewState extends State<ScorecardView> {
   void _openSwingTempo(BuildContext context) {
     Navigator.of(context)
         .push(MaterialPageRoute<void>(builder: (_) => const SwingTempoView()));
+  }
+
+  void _openHandicapDifferential(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (_) => const HandicapDifferentialView()),
+    );
   }
 
   Widget _buildCockpitPane(
@@ -283,6 +290,15 @@ class _ScorecardViewState extends State<ScorecardView> {
                           tooltip: 'Nassau Side-Bets',
                           onPressed: () =>
                               _openNassauModal(context, controller),
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            Icons.calculate_outlined,
+                            size: 20,
+                            color: colorScheme.primary,
+                          ),
+                          tooltip: 'WHS Differential & ESC',
+                          onPressed: () => _openHandicapDifferential(context),
                         ),
                         IconButton(
                           icon: Icon(
