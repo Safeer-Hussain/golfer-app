@@ -18,9 +18,9 @@ This backlog defines 25 granular daily engineering sprints for autonomous progre
   - Calculates score differentials `(113 / Slope) * (Adjusted Gross - Rating - PCC)`, enforces net double bogey maximum hole score adjustments (ESC), exceptional score reductions (ESR), and WHS 8-of-20 index averaging with soft/hard caps.
   - Tests: `test/unit/handicap_differential_test.dart`, `test/widget/handicap_differential_view_test.dart`.
 
-- [ ] **Sprint 5: Tournament Skins Pot Splitter & Carryover Engine**
-  - Low gross/net hole-by-hole skins tracker with automatic carryovers, validation modal, and payout ledger.
-  - Tests: `test/unit/skins_pot_test.dart`.
+- [x] **Sprint 5: Tournament Skins Pot Splitter & Carryover Engine**
+  - Low gross/net hole-by-hole skins tracker with automatic carryovers, validation modal, and zero-sum financial payout ledger.
+  - Tests: `test/unit/skins_pot_test.dart`, `test/widget/skins_pot_view_test.dart`.
 
 - [ ] **Sprint 6: Wolf Game Mode Scoring Engine**
   - 4-player rotational Wolf format tracker: Blind Wolf calls, Lone Wolf scoring, partner pick timers, and point leaderboards.

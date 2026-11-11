@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/di/service_locator.dart';
 import '../green_reading/green_reading_view.dart';
 import '../handicap_differential/handicap_differential_view.dart';
+import '../skins_pot/skins_pot_view.dart';
 import '../swing_tempo/swing_tempo_view.dart';
 import 'scorecard_controller.dart';
 import 'widgets/hole_stepper_cockpit.dart';
@@ -59,6 +60,11 @@ class _ScorecardViewState extends State<ScorecardView> {
     Navigator.of(context).push(
       MaterialPageRoute<void>(builder: (_) => const HandicapDifferentialView()),
     );
+  }
+
+  void _openSkinsPot(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute<void>(builder: (_) => const SkinsPotView()));
   }
 
   Widget _buildCockpitPane(
@@ -299,6 +305,15 @@ class _ScorecardViewState extends State<ScorecardView> {
                           ),
                           tooltip: 'WHS Differential & ESC',
                           onPressed: () => _openHandicapDifferential(context),
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            Icons.monetization_on_outlined,
+                            size: 20,
+                            color: colorScheme.secondary,
+                          ),
+                          tooltip: 'Tournament Skins Pot',
+                          onPressed: () => _openSkinsPot(context),
                         ),
                         IconButton(
                           icon: Icon(
