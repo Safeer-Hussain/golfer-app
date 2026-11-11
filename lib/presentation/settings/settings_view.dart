@@ -4,7 +4,9 @@ import '../../core/constants/app_constants.dart';
 import '../../core/di/service_locator.dart';
 import '../../core/theme/theme_controller.dart';
 import '../../core/utils/app_feedback.dart';
+import '../green_reading/green_reading_view.dart';
 import '../shell/recruiter_debug_drawer.dart';
+import '../swing_tempo/swing_tempo_view.dart';
 import 'settings_controller.dart';
 
 class SettingsView extends StatelessWidget {
@@ -118,6 +120,92 @@ class SettingsView extends StatelessWidget {
                         activeTrackColor: colorScheme.primary,
                         onChanged: (_) => themeController.toggleTheme(),
                       ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                'Training & Practice Utilities',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                  color: colorScheme.onSurface,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                decoration: BoxDecoration(
+                  color: colorScheme.surfaceContainer,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: colorScheme.outlineVariant),
+                ),
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: Icon(
+                        Icons.music_note_rounded,
+                        color: colorScheme.primary,
+                      ),
+                      title: Text(
+                        'Swing Tempo Metronome',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: colorScheme.onSurface,
+                        ),
+                      ),
+                      subtitle: Text(
+                        '3:1 Tour tempo audio/visual metronome & rhythm calibrator',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 14,
+                      ),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => const SwingTempoView(),
+                          ),
+                        );
+                      },
+                    ),
+                    const Divider(height: 1),
+                    ListTile(
+                      leading: Icon(
+                        Icons.speed_rounded,
+                        color: colorScheme.secondary,
+                      ),
+                      title: Text(
+                        'Green Reading & Stimpmeter',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: colorScheme.onSurface,
+                        ),
+                      ),
+                      subtitle: Text(
+                        'Slope incline degrees, fall line orientation, and lateral break',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 14,
+                      ),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => const GreenReadingView(),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),

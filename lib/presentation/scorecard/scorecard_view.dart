@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/di/service_locator.dart';
 import '../green_reading/green_reading_view.dart';
+import '../swing_tempo/swing_tempo_view.dart';
 import 'scorecard_controller.dart';
 import 'widgets/hole_stepper_cockpit.dart';
 import 'widgets/leaderboard_drawer.dart';
@@ -46,6 +47,11 @@ class _ScorecardViewState extends State<ScorecardView> {
     Navigator.of(
       context,
     ).push(MaterialPageRoute<void>(builder: (_) => const GreenReadingView()));
+  }
+
+  void _openSwingTempo(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute<void>(builder: (_) => const SwingTempoView()));
   }
 
   Widget _buildCockpitPane(
@@ -250,6 +256,15 @@ class _ScorecardViewState extends State<ScorecardView> {
                       ),
                     Row(
                       children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.music_note_rounded,
+                            size: 20,
+                            color: colorScheme.primary,
+                          ),
+                          tooltip: 'Swing Tempo Metronome',
+                          onPressed: () => _openSwingTempo(context),
+                        ),
                         IconButton(
                           icon: Icon(
                             Icons.speed_rounded,
